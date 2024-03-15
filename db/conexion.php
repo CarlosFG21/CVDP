@@ -4,10 +4,10 @@
 class conexion{
 
 
-    public $hostname="";
-    public $username="";
+    public $hostname="localhost";
+    public $username="root";
     public $password="";
-    public $dbname="";
+    public $dbname="cvdp";
     public $db;
 
 
