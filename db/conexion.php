@@ -44,18 +44,17 @@ class conexion{
     //funcion para la conexion de la base datos
 
     public function conectar(){
-        $this->db = mysql_connect($this->getHostname(),$this->getUsername(),$this->getPassword())
+        $this->db = mysqli_connect($this->getHostname(),$this->getUsername(),$this->getPassword())
         or die("<html><script language='JavaScript'>alert('¡No es posible conectarse a la base de datos! Vuelve a intentarlo más tarde.'),history.go(-1)</script></html>");
 
-        mysqli_select_db($this->db,$this->getDbname());
+        mysqli_select_db($this->db,$this->getDbName());
     }
 
-
-    //funcion para desconectar la base de datos
-
+    //Funcion para desconectar la base de datos
     public function desconectar(){
         mysqli_close($this->db);
     }
+
 
 }
 

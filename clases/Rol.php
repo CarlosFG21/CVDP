@@ -45,6 +45,26 @@ class Rol{
         $this->nombre = $_nombre1;
     }
 
+    //--------------------------------------------------------------------------------------------------------------------------------
+    //funcion guardar rol
+
+    public function GuardarRol($rol,$descripcion){
+        
+        $conexion = new conexion();
+
+        $conexion->conectar();
+
+        $sql = "insert into rol(nombre,descripcion) values(?,?)";
+
+        $ejecutar = $conexion->db->prepare($sql);
+
+        $ejecutar->bind_param('ss',$rol,$descripcion);
+
+        $ejecutar->execute();
+        
+        $conexion->desconectar();
+    }
+
 
 }
 

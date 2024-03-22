@@ -45,14 +45,14 @@ include("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form role="form" method="post" action="">
+                <form role="form" method="post" action="../crud/rolingresar.php">
                   <div class="row">
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Tipo de rol</label>
-                        <input type="text" class="form-control" placeholder="Rol" name="nombre" id="nombre"
-                        pattern="^[a-zA-Záéíóú0-9]{1,30}" required minlength="3" maxlength="5">
+                        <input type="text" class="form-control" placeholder="Rol" name="rol" id="rol"
+                        pattern="^[a-zA-Záéíóú0-9]{1,30}" required minlength="3" maxlength="15">
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -66,7 +66,7 @@ include("layout/nav.php");
                     </div> 
                   <div class="">
                   <input type="submit" value="Guardar" class="btn btn-primary " name="btnGuardarRol" id="btnGuardarRol">
-                  <a type="submit" class="btn btn-danger" href="renglon.php">Regresar</a>
+                  <a type="submit" class="btn btn-danger" href="">Regresar</a>
                 </div>     
                 </form>
               </div>
