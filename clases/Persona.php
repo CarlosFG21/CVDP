@@ -46,6 +46,22 @@ class Persona{
         $this->nombre = $_nombre1;
     }
 
+    public function guardar($nit,$nombre,$estado=1){
+        $conexion = new conexion();
+
+        $conexion->conectar();
+
+        $sql = "insert into persona(nit,nombre,estado) values(?,?,?)";
+ 
+        $ejecutar = $conexion->db->prepare($sql);
+
+        $ejecutar->bind_param('ssi',$nit,$nombre,$estado);
+
+        $ejecutar->execute();
+        
+        $conexion->desconectar();
+    }
+
 
 
 }
