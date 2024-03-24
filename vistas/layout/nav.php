@@ -79,8 +79,8 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+            <a href="rol.php" class="nav-link">
+              <i class="nav-icon fas fa-clone"></i>
               <p>
                 Roles
               </p>

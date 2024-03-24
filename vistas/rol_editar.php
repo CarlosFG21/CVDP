@@ -45,28 +45,57 @@ include("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form role="form" method="post" action="">
+              <?php
+            
+              include("../clases/Rol.php");
+              $rol = new Rol();
+              
+              $id = $_REQUEST['id'];
+              $rolArray = $rol->BuscarRol($id);
+
+              $nombre = $rolArray->getNombre();
+              $descripcion = $rolArray->getDescripcion();
+
+               ?>
+                <?php 
+              if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'existe'){
+            ?>
+             <div class="alert alert-danger alert-dismissible col-sm-6">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
+                !El rol a ingresar ya existe.!
+              </div>
+            <?php
+              }
+            ?>
+                <form role="form" method="post" action="../crud/roleditar.php?id=<?php echo $id;?>">
                   <div class="row">
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Tipo de rol</label>
-                        <input type="text" class="form-control" placeholder="Rol" name="nombre" id="nombre"
-                        pattern="^[a-zA-Záéíóú0-9]{1,30}" required minlength="3" maxlength="5">
+                        <?php
+                         echo "
+                        <input type='text' class='form-control' placeholder='Rol' value='$nombre' name='rol' id='rol'
+                        pattern='^[a-zA-Záéíóú0-9]{1,30}' required minlength='3' maxlength='15'>";
+                        ?>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Descripción</label>
-                        <input type="text" class="form-control" placeholder="Descripcion" name="descripcion" id="descripcion"
-                        required pattern="^[a-zA-Záéíóú ]{1,30}" required minlength="3" maxlength="60">
+                        <?php
+                        echo "
+                        <input type='text' class='form-control' placeholder='Descripcion' value='$descripcion' name='descripcion' id='descripcion'
+                        required pattern='^[a-zA-Záéíóú ]{1,30}' required minlength='3' maxlength='60'>";
+                        ?>
                       </div>
                     </div>
                     </div> 
                   <div class="">
-                  <input type="submit" value="Guardar" class="btn btn-primary " name="btnGuardarRol" id="btnGuardarRol">
-                  <a type="submit" class="btn btn-danger" href="renglon.php">Regresar</a>
+                  <input type="submit" value="Guardar" class="btn btn-primary " name="btnEditarRol" id="btnEditarRol">
+                  <a type="submit" class="btn btn-danger" href="rol.php">Regresar</a>
                 </div>     
                 </form>
               </div>
@@ -92,3 +121,23 @@ include("layout/footer.php");
 
 
 ?>
+
+<script type="text/javascript">
+$(function() {
+    $('#btnEditarRol').click(function() {
+
+        var valid = this.form.checkValidity();
+        if (valid) {
+          return confirm('!Desea guardar los datos');
+   
+        } else {
+            alert('Debe de rellenar los campos o coincidir con el formato indicado');
+        }
+
+        var rol = $('#rol').val();
+        var descripcion = $('#descripcion').val();
+
+    });
+
+});
+</script>

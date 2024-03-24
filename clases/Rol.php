@@ -65,6 +65,162 @@ class Rol{
         $conexion->desconectar();
     }
 
+    //--------------------------------------------------------------------------------------------------------------------------------------------
+
+    //funcion visualizar roles
+
+    public function ObtenerRoles(){
+        
+        $conexion = new conexion();
+
+        $conexion->conectar();
+
+        $resultadoRol = array();
+        
+        $sql = "SELECT * FROM rol";
+
+        $ejecutar = mysqli_query($conexion->db,$sql);
+
+        while($fila = mysqli_fetch_array($ejecutar)){
+
+            $rolIndex = new Rol();
+
+             $rolIndex->setIdrol($fila[0]);
+             $rolIndex->setNombre($fila[1]);
+             $rolIndex->setDescripcion($fila[2]);
+             $rolIndex->setEstado($fila[3]);
+
+             array_push($resultadoRol,$rolIndex);
+
+        }
+
+        $conexion->desconectar();
+        
+        return $resultadoRol;
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------
+    ///funcion editar rol
+
+    public function EditarRol($nombrerol,$descripcionrol,$idrol1){
+
+      $conexion = new conexion();
+
+      $conexion->conectar();
+
+      $sql = "update rol set nombre=?, descripcion=? where id_rol=?";
+
+      $ejecutar = $conexion->db->prepare($sql);
+
+      $ejecutar->bind_param('ssi',$nombrerol,$descripcionrol,$idrol1);
+
+      $ejecutar->execute();
+
+      $conexion->desconectar();
+
+    }
+
+
+    public function BuscarRol($idrol){
+
+
+        $conexion = new conexion();
+
+        $conexion->conectar();
+
+        $rolArray = new Rol();
+        
+        $sql = "select * from rol where id_rol='".$idrol."'";
+
+        $ejecutar = mysqli_query($conexion->db,$sql);
+
+        while($fila = mysqli_fetch_array($ejecutar)){
+
+            $rolArray->setIdrol($fila[0]);
+            $rolArray->setNombre($fila[1]);
+            $rolArray->setDescripcion($fila[2]);
+            $rolArray->setEstado($fila[2]);
+
+
+        }
+
+        $conexion->desconectar();
+
+        return $rolArray;
+
+
+    }
+    
+    //----------------------------------------------------------------------------------------------------------
+    //Funcion eliminar rol
+
+    public function EliminarRol($idrol){
+
+
+        $conexion = new conexion();
+
+        $conexion->conectar();
+
+        $estado = 0;
+
+        $sql = "update rol set estado=? where id_rol=?";
+
+        $ejecutar = $conexion->db->prepare($sql);
+
+        $ejecutar->bind_param('ii',$estado, $idrol);
+
+        $ejecutar->execute();
+
+        $conexion->desconectar();
+
+    }
+
+    public function ReactivarRol($idrol){
+
+     $conexion = new conexion();
+
+     $conexion->conectar();
+
+     $estado = 1;
+
+     $sql = "update rol set estado=? where id_rol=?";
+
+     $ejecutar = $conexion->db->prepare($sql);
+
+     $ejecutar->bind_param('ii',$estado, $idrol);
+
+     $ejecutar->execute();
+
+     $conexion->desconectar();
+
+
+    }
+
+    public function ValidarRol($rolv){   
+
+
+        $conexion = new conexion();
+
+        $conexion->conectar();
+
+        $estado = 0;
+
+        $sql = "select nombre from rol where nombre='".$rolv."'";
+
+        $ejecutar = mysqli_query($conexion->db,$sql);
+
+        while($fila =  mysqli_fetch_array($ejecutar)){
+            if(strcmp($fila[0],$rolv)===0){
+                $estado=1;
+                break;
+            }
+        }
+
+        $conexion->desconectar();
+
+        return $estado;
+    }
+
 
 }
 
