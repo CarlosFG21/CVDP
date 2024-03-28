@@ -21,7 +21,7 @@ include("layout/nav.php");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Roles</h1>
+            <h1>Categoria de productos</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -47,14 +47,15 @@ include("layout/nav.php");
               <div class="card-body">
               <?php
             
-              include("../clases/Rol.php");
-              $rol = new Rol();
+              include("../clases/CategoriaP.php");
+              $categoria = new Categoriap();
               
               $id = $_REQUEST['id'];
-              $rolArray = $rol->BuscarRol($id);
 
-              $nombre = $rolArray->getNombre();
-              $descripcion = $rolArray->getDescripcion();
+              $categoriaArray = $categoria->BuscarCategoria($id);
+
+              $nombre = $categoriaArray->getNombre();
+              $descripcion = $categoriaArray->getDescripcion();
 
                ?>
                 <?php 
@@ -63,20 +64,20 @@ include("layout/nav.php");
              <div class="alert alert-danger alert-dismissible col-sm-6">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
-                !El rol a editar ya existe.!
+                !La categoria a editar ya existe.!
               </div>
             <?php
               }
             ?>
-                <form role="form" method="post" action="../crud/roleditar.php?id=<?php echo $id;?>">
+                <form role="form" method="post" action="../crud/categoriapeditar.php?id=<?php echo $id;?>">
                   <div class="row">
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>Tipo de rol</label>
+                        <label>Tipo de categoria(Producto)</label>
                         <?php
                          echo "
-                        <input type='text' class='form-control' placeholder='Rol' value='$nombre' name='rol' id='rol'
+                        <input type='text' class='form-control' placeholder='Rol' value='$nombre' name='categoriap' id='categoriap'
                         pattern='^[a-zA-Záéíóú0-9]{1,30}' required minlength='3' maxlength='15'>";
                         ?>
                       </div>
@@ -94,8 +95,8 @@ include("layout/nav.php");
                     </div>
                     </div> 
                   <div class="">
-                  <input type="submit" value="Guardar" class="btn btn-primary " name="btnEditarRol" id="btnEditarRol">
-                  <a type="submit" class="btn btn-danger" href="rol.php">Regresar</a>
+                  <input type="submit" value="Guardar" class="btn btn-primary " name="btnEditarCategotiap" id="btnEditarCategotiap">
+                  <a type="submit" class="btn btn-danger" href="categoria_producto.php">Regresar</a>
                 </div>     
                 </form>
               </div>
@@ -134,7 +135,7 @@ $(function() {
             alert('Debe de rellenar los campos o coincidir con el formato indicado');
         }
 
-        var rol = $('#rol').val();
+        var categoria = $('#categoriap').val();
         var descripcion = $('#descripcion').val();
 
     });

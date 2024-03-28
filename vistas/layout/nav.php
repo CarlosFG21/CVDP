@@ -87,10 +87,26 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="categoria_producto.php" class="nav-link">
+              <i class="nav-icon fas fa-male"></i>
+              <p>
+                Clientes
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="usuario.php" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Usuarios
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="categoria_producto.php" class="nav-link">
+              <i class="nav-icon fas fa-braille"></i>
+              <p>
+                Categoria Productos
               </p>
             </a>
           </li>
