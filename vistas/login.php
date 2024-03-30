@@ -23,9 +23,9 @@
             </div>
 
             <!-- Login Form -->
-            <form action="../clases/validacion.php" id="form-session" method="post" name="signin-form">
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Usuario">
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="Contraseña">
+            <form action="../clases/Validacion.php" id="form-login" method="post" name="form-login">
+                <input type="text" id="usuario" class="fadeIn second" name="usuario" placeholder="Usuario">
+                <input type="password" id="contraseña" class="fadeIn third" name="contraseña" placeholder="Contraseña">
                 <input type="submit" class="fadeIn fourth" value="Ingresar">
             </form>
 
