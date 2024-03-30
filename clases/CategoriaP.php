@@ -111,11 +111,15 @@ class Categoriap{
 
       $categop = new Categoriap();
 
-      $sql = "select * from categoria_producto where id_categoria='".$idcategoria."'";
+      $sql = "select * from categoria_producto where id_categoria=?";
 
-      $ejecutar = mysqli_query($conexion->db,$sql);
+      $ejecutar = $conexion->db->prepare($sql);
+        $ejecutar->bind_param('i', $idcategoria);
+        $ejecutar->execute();
+    
+        $resultado = $ejecutar->get_result();
 
-      while($fila= mysqli_fetch_array($ejecutar)){
+      while($fila= $resultado->fetch_array(MYSQLI_NUM)){
 
         $categop->setIdcategoria($fila[0]);
         $categop->setNombre($fila[1]);
@@ -210,11 +214,15 @@ class Categoriap{
 
         $estado = 0;
 
-        $sql = "select nombre from categoria_producto where nombre='".$categoriapv."'";
+        $sql = "select nombre from categoria_producto where nombre=?";
 
-        $ejecutar = mysqli_query($conexion->db,$sql);
+        $ejecutar = $conexion->db->prepare($sql);
+        $ejecutar->bind_param('s', $categoriapv);
+        $ejecutar->execute();
+    
+        $resultado = $ejecutar->get_result();
 
-        while($fila =  mysqli_fetch_array($ejecutar)){
+        while($fila = $resultado->fetch_array(MYSQLI_NUM)){
             if(strcmp($fila[0],$categoriapv)===0){
                 $estado=1;
                 break;

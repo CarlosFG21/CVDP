@@ -87,10 +87,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="categoria_producto.php" class="nav-link">
+            <a href="persona.php" class="nav-link">
               <i class="nav-icon fas fa-male"></i>
               <p>
-                Clientes
+                Clientes / Proveedores
               </p>
             </a>
           </li>

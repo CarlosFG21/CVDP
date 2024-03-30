@@ -81,16 +81,155 @@ class Usuario{
     }
 
 
-    //Creacion de funciones para login, registro, edicion, visualizacion y eliminacion de usuarios
+    //funcion guardar
+    public function GuardarUsuario($idrol,$nombre,$clave){
+        
+        $conexion = new conexion();
+        $conexion->conectar();
 
+        $sql = "insert into usuario(Id_Rol, Nombre, Clave) values(?,?,?)";
+        $ejecutar = $conexion->db->prepare($sql);
+        $ejecutar->bind_param('iss',$idrol,$nombre,$clave);
+        $ejecutar->execute();
+        
+        $conexion->desconectar();
+    }
+
+
+    //funcion visualizar Usuarios
+    public function ObtenerUsuarios(){
+        
+        $conexion = new conexion();
+        $conexion->conectar();
+
+        $resultadoUsuarios = array();
+
+        $sql = "SELECT * FROM usuario";
+        $ejecutar = mysqli_query($conexion->db,$sql);
+
+        while($fila = mysqli_fetch_array($ejecutar)){
+
+            $usuarioIndex = new Usuario();
+
+            $usuarioIndex->setIdusuario($fila[0]);
+            $usuarioIndex->setIdrol($fila[1]);
+            $usuarioIndex->setNombre($fila[2]);
+            $usuarioIndex->setClave($fila[3]);
+            $usuarioIndex->setEstado($fila[4]);
+
+             array_push($resultadoUsuarios,$usuarioIndex);
+
+        }
+
+        $conexion->desconectar();
+        
+        return $resultadoUsuarios;
+    }
+
+
+    //funcion editar
+    public function EditarUsuario($idusuario,$idrol,$nombre,$clave){
+
+      $conexion = new conexion();
+      $conexion->conectar();
+
+      $sql = "update usuario set id_rol=?, nombre=?, clave=? where id_usuario=?";
+      $ejecutar = $conexion->db->prepare($sql);
+      $ejecutar->bind_param('issi',$idrol,$nombre,$clave,$idusuario);
+      $ejecutar->execute();
+
+      $conexion->desconectar();
+
+    }
+
+
+    //funcion Buscar Usuario
+    public function BuscarUsuario($idusuario) {
+        $conexion = new conexion();
+        $conexion->conectar();
+    
+        $usuarioArray = array(); // Inicializa un array vacío
+    
+        $sql = "SELECT * FROM usuario WHERE id_usuario=?";
+        $ejecutar = $conexion->db->prepare($sql);
+        $ejecutar->bind_param('i', $idusuario);
+        $ejecutar->execute();
+    
+        // Obtiene el resultado de la consulta preparada
+        $resultado = $ejecutar->get_result();
+    
+        // Recorre los resultados y crea objetos Usuario
+        while ($fila = $resultado->fetch_array(MYSQLI_NUM)) {
+            $usuario = new Usuario(); // Crea un nuevo objeto Usuario
+            $usuario->setIdusuario($fila[0]);
+            $usuario->setIdrol($fila[1]);
+            $usuario->setNombre($fila[2]);
+            $usuario->setClave($fila[3]);
+            $usuario->setEstado($fila[4]);
+            $usuarioArray[] = $usuario; // Agrega el objeto Usuario al array
+        }
+    
+        $conexion->desconectar();
+    
+        return $usuarioArray;
+    }
+    
+    
+    //Funcion Eliminar
+    public function EliminarUsuario($idusuario){
+
+        $conexion = new conexion();
+        $conexion->conectar();
+
+        $estado = 0;
+
+        $sql = "update usuario set estado=? where id_usuario=?";
+        $ejecutar = $conexion->db->prepare($sql);
+        $ejecutar->bind_param('ii',$estado, $idusuario);
+        $ejecutar->execute();
+
+        $conexion->desconectar();
+
+    }
+
+
+    //funcion Reactivar Usuario
+    public function ReactivarUsuario($idusuario) {
+
+        $conexion = new conexion();
+        $conexion->conectar();
+
+        $estado = 1;
+
+        $sql = "update usuario set estado=? where id_usuario=?";
+        $ejecutar = $conexion->db->prepare($sql);
+        $ejecutar->bind_param('ii',$estado, $idusuario);
+        $ejecutar->execute();
+
+        $conexion->desconectar();
+
+    }
+
+
+    //funcion Validar
+    public function ValidarUsuario($nombre){
+        $conexion = new conexion();
+        $conexion->conectar();
+    
+        $sql = "SELECT COUNT(*) FROM usuario WHERE Nombre=?";
+        $stmt = $conexion->db->prepare($sql);
+        $stmt->bind_param('s', $nombre);
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $stmt->close();
+    
+        $conexion->desconectar();
+    
+        return $count > 0;
+    }
     
 
-
-
-
 }
-
-
-
 
 ?>

@@ -78,7 +78,7 @@ include("layout/nav.php");
                         <?php
                          echo "
                         <input type='text' class='form-control' placeholder='Rol' value='$nombre' name='categoriap' id='categoriap'
-                        pattern='^[a-zA-Záéíóú0-9]{1,30}' required minlength='3' maxlength='15'>";
+                        pattern='^[a-zA-Záéíóú]{1,30}' required minlength='3' maxlength='15'>";
                         ?>
                       </div>
                     </div>
@@ -125,7 +125,7 @@ include("layout/footer.php");
 
 <script type="text/javascript">
 $(function() {
-    $('#btnEditarRol').click(function() {
+    $('#btnEditarCategotiap').click(function() {
 
         var valid = this.form.checkValidity();
         if (valid) {

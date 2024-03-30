@@ -130,11 +130,15 @@ class Rol{
 
         $rolArray = new Rol();
         
-        $sql = "select * from rol where id_rol='".$idrol."'";
+        $sql = "select * from rol where id_rol=?";
 
-        $ejecutar = mysqli_query($conexion->db,$sql);
+        $ejecutar = $conexion->db->prepare($sql);
+        $ejecutar->bind_param('i', $idrol);
+        $ejecutar->execute();
+    
+        $resultado = $ejecutar->get_result();
 
-        while($fila = mysqli_fetch_array($ejecutar)){
+        while($fila = $resultado->fetch_array(MYSQLI_NUM)){
 
             $rolArray->setIdrol($fila[0]);
             $rolArray->setNombre($fila[1]);
@@ -205,11 +209,15 @@ class Rol{
 
         $estado = 0;
 
-        $sql = "select nombre from rol where nombre='".$rolv."'";
+        $sql = "select nombre from rol where nombre=?";
 
-        $ejecutar = mysqli_query($conexion->db,$sql);
+        $ejecutar = $conexion->db->prepare($sql);
+        $ejecutar->bind_param('s', $rolv);
+        $ejecutar->execute();
+    
+        $resultado = $ejecutar->get_result();
 
-        while($fila =  mysqli_fetch_array($ejecutar)){
+        while($fila = $resultado->fetch_array(MYSQLI_NUM)){
             if(strcmp($fila[0],$rolv)===0){
                 $estado=1;
                 break;
