@@ -110,6 +110,146 @@ class Persona{
 
     }
 
+    //-----------------------------------------------------------------------------------------------------------------------------------
+    //Funcion Editar Persona
+
+    public function EditarPersona($tipo,$nombre,$nit,$idpersona){ 
+
+
+        $conexion = new conexion();
+
+        $conexion->conectar();
+
+        $sql = "update persona set nombre=?, nit=?, tipo=? where id_persona=?";
+
+        $ejecutar = $conexion->db->prepare($sql);
+
+        $ejecutar->bind_param('sssi',$nombre,$nit,$tipo,$idpersona);
+
+        $ejecutar->execute();
+
+        $conexion->desconectar();
+
+    }
+
+
+    //------------------------------------------------------------------------------------------------------------------
+    //Funcion para buscar las personas
+
+    public function BuscarPersona($idpersona){
+
+        $conexion = new conexion();
+
+        $conexion->conectar();
+
+        $personaArray = new Persona();
+        
+        $sql = "select * from persona where id_persona=?";
+
+        $ejecutar = $conexion->db->prepare($sql);
+
+        $ejecutar->bind_param('i',$idpersona);
+
+        $ejecutar->execute();
+
+        $resultado = $ejecutar->get_result();
+
+        while($fila = $resultado->fetch_array(MYSQLI_NUM)){
+
+
+            $personaArray->setIdpersona($fila[0]);
+            $personaArray->setNombre($fila[1]);
+            $personaArray->setNit($fila[2]);
+            $personaArray->setEstado($fila[3]);
+            $personaArray->setTipo($fila[4]);
+        
+
+        }
+
+        $conexion->desconectar();
+
+        return $personaArray;
+
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------------
+    //Funcion eliminar persona
+
+    public function EliminarPersona($idpersona){
+
+
+        $conexion = new conexion();
+
+        $conexion->conectar();
+
+        $estado = 0;
+
+        $sql = "update persona set estado=? where id_persona=?";
+
+        $ejecutar = $conexion->db->prepare($sql);
+
+        $ejecutar->bind_param('ii',$estado,$idpersona);
+
+        $ejecutar->execute();
+
+        $conexion->desconectar();
+
+
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------
+    //Funcion reactivar persona
+
+    public function  ReactivarPersona($idpersona){
+
+
+        $conexion = new conexion();
+
+        $conexion->conectar();
+
+        $estado = 1;
+
+        $sql = "update persona set estado=? where id_persona=?";
+
+        $ejecutar = $conexion->db->prepare($sql);
+
+        $ejecutar->bind_param('ii',$estado,$idpersona);
+
+        $ejecutar->execute();
+
+        $conexion->desconectar();
+
+
+    }
+
+    public function ValidarPersona($nombre,$tipo){   
+
+
+        $conexion = new conexion();
+
+        $conexion->conectar();
+
+        $estado = 0;
+
+        $sql = "select nombre,tipo from persona where nombre=? and tipo=?";
+
+        $ejecutar = $conexion->db->prepare($sql);
+        $ejecutar->bind_param('ss', $nombre,$tipo);
+        $ejecutar->execute();
+    
+        $resultado = $ejecutar->get_result();
+
+        while($fila = $resultado->fetch_array(MYSQLI_NUM)){
+            if(strcmp($fila[0],$nombre)===0 && strcmp($fila[1],$tipo)===0){
+                $estado=1;
+                break;
+            }
+        }
+
+        $conexion->desconectar();
+
+        return $estado;
+    }
 
 
 
