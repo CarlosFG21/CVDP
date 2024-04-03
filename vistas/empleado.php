@@ -45,7 +45,7 @@ include("layout/nav.php");
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Nombre </th>
+                    <th>Nombre</th>
                     <th>Apellido </th>
                     <th>Edad</th>
                     <th>Puesto</th>

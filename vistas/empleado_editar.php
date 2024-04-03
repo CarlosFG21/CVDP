@@ -40,99 +40,126 @@ include("layout/nav.php");
             <!-- general form elements disabled -->
             <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title">Ingresar</h3>
+                <h3 class="card-title">Editar</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-             <!-- <div class="form-group">
-              <h4>Datos Laborales</h4>
-              </div> -->
+              <?php
+            
+            include("../clases/Empleado.php");
+            $empleado = new Empleado();
+            
+            $id = $_REQUEST['id'];
+
+            $empleadoArray = $empleado->BuscarEmpleado($id);
+
+            $nombre = $empleadoArray->getNombre();
+            $apellido = $empleadoArray->getApellido();
+            $edad = $empleadoArray->getEdad();
+            $puesto = $empleadoArray->getPuesto();
+            $salario = $empleadoArray->getSalario();
+            $fecha_ent = $empleadoArray->getFecha();
+            $idusuario = $empleadoArray->getIdusuario();
+
+             ?>
               <?php 
                 if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'existe'){
               ?>
                <div class="alert alert-danger alert-dismissible col-sm-6">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                   <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
-                  !El empleado a ingresar ya existe.!
+                  !El Empleado a ingresar ya existe.!
                 </div>
               <?php
                 }
               ?>
               <!-- /.Validacion codigo php -->
-                <form role="form" method="post" action="../crud/empleadoingresar.php">
+                <form role="form" method="post" action="../crud/empleadoeditar.php?id=<?php echo $id;?>">
                   <div class="row">
+                    
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Nombre</label>
-                        <input type="text" class="form-control" placeholder="Nombre" minlength="3" maxlength="25" required name="nombre" id="nombre" pattern="^[a-zA-Záéíóú ]{1,30}">
+                        <?php
+                         echo "
+                        <input type='text' class='form-control' placeholder='Nombre' value='$nombre' name='nombre' id='nombre'
+                        pattern='^[a-zA-Záéíóú ]{1,30}' required minlength='3' maxlength='15'>";
+                        ?>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Apellido</label>
-                        <input type="text" class="form-control" placeholder="Apellido" minlength="3" maxlength="25" required name="apellido" id="apellido" pattern="^[a-zA-Záéíóú ]{1,30}">
+                        <?php
+                         echo "
+                        <input type='text' class='form-control' placeholder='Apellido' value='$apellido' name='apellido' id='apellido'
+                        pattern='^[a-zA-Záéíóú ]{1,30}' required minlength='3' maxlength='15'>";
+                        ?>
                       </div>
                     </div>
-                    
+                  
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>Edad</label>
-                        <input type="number" class="form-control" placeholder="Edad" minlength="18" maxlength="120" required name="edad" id="edad" pattern="^[a-zA-Záéíóú ]{1,30}">
+                        <label>edad</label>
+                        <?php
+                         echo "
+                        <input type='number' class='form-control' placeholder='Edad' value='$edad' name='edad' id='edad'
+                        pattern='^[0-9]{1,30}' required minlength='9' maxlength='9'>";
+                        ?>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Puesto</label>
-                        <select type="text"class="form-control" name="puesto" id="puesto">
-                          <option>Gerente</option>
-                          <option>Administrador</option>
-                          <option>Cajero</option>
-                          <option>Empleado</option>
-                        </select>
+                        <?php
+                         echo "
+                        <input type='text' class='form-control' placeholder='Puesto' value='$puesto' name='puesto' id='puesto'
+                        pattern='^[a-zA-Záéíóú ]{1,30}' required minlength='3' maxlength='15'>";
+                        ?>
                       </div>
                     </div>
-
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Salario</label>
-                        <input type="number" class="form-control" placeholder="Salario" minlength="3" maxlength="25" required name="salario" id="salario" pattern="^[a-zA-Záéíóú ]{1,30}">
+                        <?php
+                         echo "
+                        <input type='number' class='form-control' placeholder='Salario' value='$salario' name='salario' id='salario'
+                        pattern='^[0-9]{1,30}' required minlength='9' maxlength='9'>";
+                        ?>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Fecha de Entrada</label>
-                        <input type="date" class="form-control" placeholder="Fecha_ent" required name="fecha_ent" id="fecha_ent" pattern="^[a-zA-Záéíóú ]{1,30}">
+                        <?php
+                         echo "
+                        <input type='date' class='form-control' placeholder='Fecha_ent' value='$fecha_ent' name='fecha_ent' id='fecha_ent'
+                        pattern='^[a-zA-Záéíóú ]{1,30}' required minlength='3' maxlength='15'>";
+                        ?>
                       </div>
                     </div>
-                    
-                    <div class="col-sm-6">
+
+                  </div>
+                  <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Usuario</label>
-                        <input type="number" class="form-control" placeholder="id_usuario" minlength="3" maxlength="25" required name="id_usuario" id="id_usuario" pattern="^[a-zA-Záéíóú ]{1,30}">
+                        <?php
+                         echo "
+                        <input type='number' class='form-control' placeholder='Salario' value='$idusuario' name='id_usuario' id='id_usuario'
+                        pattern='^[0-9]{1,30}' required minlength='9' maxlength='9'>";
+                        ?>
                       </div>
                     </div>
-
                   
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Estado</label>
-                        <select type="text"class="form-control" name="estado" id="estado">
-                          <option value="1">Activo</option>
-                        </select>
-                      </div>
-                    </div>
-                    
-
                   <div class="">
-                  <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardarEmpleado" id="btnGuardarEmpleado">
+                  <input type="submit" value="Guardar" class="btn btn-primary" name="btnEditarEmpleado" id="btnEditarEmpleado">
                   <a type="submit" class="btn btn-danger" href="empleado.php">Regresar</a>
                 </div>     
                 </form>
@@ -160,7 +187,7 @@ include('layout/footer.php');
 
 <script type="text/javascript">
 $(function() {
-    $('#btnGuardarEmpleado').click(function() {
+    $('#btnEditarEmpleado').click(function() {
 
         var valid = this.form.checkValidity();
         if (valid) {
@@ -175,8 +202,7 @@ $(function() {
         var edad = $('#edad').val();
         var puesto = $('#puesto').val();
         var salario = $('#salario').val();
-        var fecha_ent = $('#fecha_ent').val();
-        var id_usuario = $('#id_usuario').val();
+        var fecha_ent = $('#fecha_emt').val();
 
     });
 

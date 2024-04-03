@@ -3,16 +3,17 @@
 include("../db/conexion.php");
 
 class Empleado{
-
-    public $apellido;
-    public $edad;
-    public $estado;
-    public $fecha_ent;
+//variables publicas
     public $id_empleado;
     public $id_usuario;
     public $nombre;
+    public $apellido;
+    public $edad;
     public $puesto;
     public $salario;
+    public $fecha_ent;
+    public $estado;
+
  //metodos get y set
     public function getApellido(){
         return $this->apellido;
@@ -64,7 +65,7 @@ class Empleado{
     }
 
 
-    public function getNnombre(){
+    public function getNombre(){
         return $this->nombre;
     }
      public function setNombre($_nombre1){
@@ -94,17 +95,17 @@ class Empleado{
     //------------------------------------------------------------------------------------------------------------------
     //Funcion Guardar Informacion Empleado
 
-    public function GuardarEmpleado($nombre, $apellido, $salario, $puesto, $id_usuario, $fecha_ent,$edad){
+    public function GuardarEmpleado($id_usuario,$nombre,$apellido,$edad,$puesto,$salario,$fecha_ent,$estado){
 
         $conexion = new conexion();
 
         $conexion->conectar();
 
-        $sql = "insert into empleado(id_usuario,nombre, apellido, edad, puesto, salario, fecha_entrada) values(?,?,?,?,?,?)";
+        $sql = "insert into empleado(Id_Usuario,Nombre,Apellido,Edad,Puesto,Salario,Fecha_Entrada,Estado) values(?,?,?,?,?,?,?,?)";
  
         $ejecutar = $conexion->db->prepare($sql);
-
-        $ejecutar->bind_param('ssi',$id_usuario,$nombre,$apellido,$edad,$puesto,$salario,$fecha_ent);
+        
+        $ejecutar->bind_param('issisds',$id_usuario,$nombre,$apellido,$edad,$puesto,$salario,$fecha_ent,$estado);
 
         $ejecutar->execute();
         
@@ -130,16 +131,16 @@ class Empleado{
 
         $empleadoIndex = new Empleado();
 
-         $$empleadoIndex->setIdempleado($fila[0]);
-         $empleadoIndex->setNombre($fila[1]);
-         $empleadoIndex->setApellido($fila[2]);
-         $empleadoIndex->setEdad($fila[3]);
-         $empleadoIndex->setPuesto($fila[4]);
-         $empleadoIndex->setSalario($fila[5]);
-         $empleadoIndex->setFecha($fila[6]);
-         $empleadoIndex->setEstado($fila[7]);
+         $empleadoIndex->setIdempleado($fila[0]);
+         $empleadoIndex->setNombre($fila[2]);
+         $empleadoIndex->setApellido($fila[3]);
+         $empleadoIndex->setEdad($fila[4]);
+         $empleadoIndex->setPuesto($fila[5]);
+         $empleadoIndex->setSalario($fila[6]);
+         $empleadoIndex->setFecha($fila[7]);
+         $empleadoIndex->setEstado($fila[8]);
 
-         array_push($personaob,$personaIndex);
+         array_push($empleadoob,$empleadoIndex);
 
     }
 
@@ -153,7 +154,7 @@ class Empleado{
     //-----------------------------------------------------------------------------------------------------------------------------------
     //Funcion Editar empleados
 
-    public function EditarEmpleado($nombre, $apellido, $salario, $puesto, $id_usuario, $fecha_ent,$edad,$id_empleado){ 
+    public function EditarEmpleado($nombre, $apellido, $edad,$salario, $puesto, $id_usuario, $fecha_ent,$id_empleado){ 
 
 
         $conexion = new conexion();
@@ -198,13 +199,14 @@ class Empleado{
 
 
             $empleadoArray->setIdempleado($fila[0]);
-            $empleadoArray->setNombre($fila[1]);
-            $empleadoArray->setApellido($fila[2]);
-            $empleadoArray->setEdad($fila[3]);
-            $empleadoArray->setPuesto($fila[4]);
-            $empleadoArray->setSalario($fila[5]);
-            $empleadoArray->setFecha($fila[6]);
-            $empleadoArray->setEstado($fila[7]);
+            $empleadoArray->setIdusuario($fila[1]);
+            $empleadoArray->setNombre($fila[2]);
+            $empleadoArray->setApellido($fila[3]);
+            $empleadoArray->setEdad($fila[4]);
+            $empleadoArray->setPuesto($fila[5]);
+            $empleadoArray->setSalario($fila[6]);
+            $empleadoArray->setFecha($fila[7]);
+            $empleadoArray->setEstado($fila[8]);
         
 
         }
@@ -297,7 +299,5 @@ class Empleado{
 
 
 }
-
-
 
 ?>
