@@ -18,7 +18,7 @@ $id_usuario = $_POST['id_usuario'];
 
 if($empleado->ValidarEmpleado($nombre,$apellido)==0){
 
-$empleado->EditarEmpleado($nombre, $apellido, $edad,$salario, $puesto, $id_usuario, $fecha_ent,$id);
+$empleado->EditarEmpleado($id_usuario,$nombre, $apellido, $edad,$puesto,$salario, $fecha_ent,$id);
 
 header("Location: ../vistas/Empleado.php");
 

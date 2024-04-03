@@ -124,7 +124,7 @@ include("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Estado</label>
-                        <select type="text"class="form-control" name="estado" id="estado">
+                        <select type="number"class="form-control" name="estado" id="estado">
                           <option value="1">Activo</option>
                         </select>
                       </div>

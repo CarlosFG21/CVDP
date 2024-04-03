@@ -105,7 +105,7 @@ class Empleado{
  
         $ejecutar = $conexion->db->prepare($sql);
         
-        $ejecutar->bind_param('issisds',$id_usuario,$nombre,$apellido,$edad,$puesto,$salario,$fecha_ent,$estado);
+        $ejecutar->bind_param('issisdsi',$id_usuario,$nombre,$apellido,$edad,$puesto,$salario,$fecha_ent,$estado);
 
         $ejecutar->execute();
         
@@ -154,7 +154,7 @@ class Empleado{
     //-----------------------------------------------------------------------------------------------------------------------------------
     //Funcion Editar empleados
 
-    public function EditarEmpleado($nombre, $apellido, $edad,$salario, $puesto, $id_usuario, $fecha_ent,$id_empleado){ 
+    public function EditarEmpleado($id_usuario,$nombre,$apellido,$edad,$puesto,$salario,$fecha_ent,$id_empleado){ 
 
 
         $conexion = new conexion();
@@ -165,7 +165,7 @@ class Empleado{
 
         $ejecutar = $conexion->db->prepare($sql);
 
-        $ejecutar->bind_param('sssi',$id_usuario,$nombre,$apellido,$edad,$puesto,$salario,$fecha_ent,$id_empleado);
+        $ejecutar->bind_param('issisdsi',$id_usuario,$nombre,$apellido,$edad,$puesto,$salario,$fecha_ent,$id_empleado);
 
         $ejecutar->execute();
 
