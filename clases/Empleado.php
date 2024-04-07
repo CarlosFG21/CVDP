@@ -296,6 +296,45 @@ class Empleado{
         return $estado;
     }
 
+    //-----------------------------------------------------------------------------------------------------------
+    //Esta funcion no tocarlas
+    public function ObtenerEmpleadosActivo(){
+
+        $conexion = new conexion();
+   
+        $conexion->conectar();
+   
+        $empleadoob = array();
+   
+        $sql = "select * FROM empleado where estado=1";
+   
+        $ejecutar = mysqli_query($conexion->db,$sql);
+   
+        while($fila = mysqli_fetch_array($ejecutar)){
+   
+           $empleadoIndex = new Empleado();
+   
+            $empleadoIndex->setIdempleado($fila[0]);
+            $empleadoIndex->setNombre($fila[2]);
+            $empleadoIndex->setApellido($fila[3]);
+            $empleadoIndex->setEdad($fila[4]);
+            $empleadoIndex->setPuesto($fila[5]);
+            $empleadoIndex->setSalario($fila[6]);
+            $empleadoIndex->setFecha($fila[7]);
+            $empleadoIndex->setEstado($fila[8]);
+   
+            array_push($empleadoob,$empleadoIndex);
+   
+       }
+   
+       $conexion->desconectar();
+       
+       return $empleadoob;
+   
+   
+       }
+   
+
 
 
 }
