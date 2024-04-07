@@ -104,7 +104,7 @@ class Usuario{
 
         $resultadoUsuarios = array();
 
-        $sql = "SELECT * FROM usuario";
+        $sql = "SELECT u.Id_Usuario, r.Nombre, u.Nombre, u.Clave, u.Estado FROM usuario u JOIN rol r on u.Id_Rol=r.Id_Rol";
         $ejecutar = mysqli_query($conexion->db,$sql);
 
         while($fila = mysqli_fetch_array($ejecutar)){
@@ -117,7 +117,7 @@ class Usuario{
             $usuarioIndex->setClave($fila[3]);
             $usuarioIndex->setEstado($fila[4]);
 
-             array_push($resultadoUsuarios,$usuarioIndex);
+            array_push($resultadoUsuarios,$usuarioIndex);
 
         }
 
