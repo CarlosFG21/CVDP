@@ -9,7 +9,7 @@
 	$usuario = $_POST['usuario'];
 	$contraseña = $_POST['contraseña'];
 
-	$sql = "SELECT * FROM usuario WHERE Nombre = ?";
+	$sql = "SELECT u.Id_Usuario, r.Nombre AS Tipo, u.Nombre, u.Clave FROM usuario u JOIN rol r ON u.Id_Rol = r.Id_Rol WHERE u.Nombre = ? AND u.Estado=1";
 	$stmt = $conexion->db->prepare($sql);
 	$stmt->bind_param("s", $usuario);
 	$stmt->execute();
@@ -18,8 +18,8 @@
 	if ($resultado->num_rows > 0) {
 		$fila = $resultado->fetch_assoc();
 		if (password_verify($contraseña, $fila['Clave'])) {
-			$_SESSION['nombre'] = $nombre;
-			$_SESSION['tipo'] = $fila['Id_Rol'];
+			$_SESSION['nombre'] = $usuario;
+			$_SESSION['tipo'] = $fila['Tipo'];
 			$_SESSION['id'] = $fila['Id_Usuario'];
 			echo "<script> alert('".$_SESSION['tipo']."'); </script>";
 			header("Location: ../vistas/index.php");
