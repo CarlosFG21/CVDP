@@ -115,11 +115,14 @@ include("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Puesto</label>
-                        <?php
-                         echo "
-                        <input type='text' class='form-control' placeholder='Puesto' value='$puesto' name='puesto' id='puesto'
-                        pattern='^[a-zA-Záéíóú ]{1,30}' required minlength='3' maxlength='15'>";
-                        ?>
+                        <select type="text"class="form-control" name="puesto" id="puesto">
+                          <?php echo "<option> $puesto</option>";?>
+                          <option>Gerente</option>  
+                          <option>Administrador</option>
+                          <option>Cajero</option>
+                          <option>Empleado</option>
+                        </select>
+                        
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -146,17 +149,6 @@ include("layout/nav.php");
                     </div>
 
                   </div>
-                  <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Usuario</label>
-                        <?php
-                         echo "
-                        <input type='number' class='form-control' placeholder='Salario' value='$idusuario' name='id_usuario' id='id_usuario'
-                        pattern='^[0-9]{1,30}' required minlength='9' maxlength='9'>";
-                        ?>
-                      </div>
-                    </div>
                   
                   <div class="">
                   <input type="submit" value="Guardar" class="btn btn-primary" name="btnEditarEmpleado" id="btnEditarEmpleado">

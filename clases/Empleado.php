@@ -95,12 +95,12 @@ class Empleado{
     //------------------------------------------------------------------------------------------------------------------
     //Funcion Guardar Informacion Empleado
 
-    public function GuardarEmpleado($id_usuario,$nombre,$apellido,$edad,$puesto,$salario,$fecha_ent,$estado){
+    public function GuardarEmpleado($id_usuario,$nombre,$apellido,$edad,$puesto,$salario,$fecha_ent){
 
         $conexion = new conexion();
 
         $conexion->conectar();
-
+        $estado=1;
         $sql = "insert into empleado(Id_Usuario,Nombre,Apellido,Edad,Puesto,Salario,Fecha_Entrada,Estado) values(?,?,?,?,?,?,?,?)";
  
         $ejecutar = $conexion->db->prepare($sql);
@@ -154,18 +154,18 @@ class Empleado{
     //-----------------------------------------------------------------------------------------------------------------------------------
     //Funcion Editar empleados
 
-    public function EditarEmpleado($id_usuario,$nombre,$apellido,$edad,$puesto,$salario,$fecha_ent,$id_empleado){ 
+    public function EditarEmpleado($nombre,$apellido,$edad,$puesto,$salario,$fecha_ent,$id_empleado){ 
 
 
         $conexion = new conexion();
 
         $conexion->conectar();
 
-        $sql = "update empleado set id_usuario=?,nombre=?, apellido=?, edad=?, puesto=?, salario=?, fecha_entrada=? where id_empleado=?";
+        $sql = "update empleado set nombre=?, apellido=?, edad=?, puesto=?, salario=?, fecha_entrada=? where id_empleado=?";
 
         $ejecutar = $conexion->db->prepare($sql);
 
-        $ejecutar->bind_param('issisdsi',$id_usuario,$nombre,$apellido,$edad,$puesto,$salario,$fecha_ent,$id_empleado);
+        $ejecutar->bind_param('ssisdsi',$nombre,$apellido,$edad,$puesto,$salario,$fecha_ent,$id_empleado);
 
         $ejecutar->execute();
 
