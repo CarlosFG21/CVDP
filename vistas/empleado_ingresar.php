@@ -114,21 +114,12 @@ include("layout/nav.php");
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>Usuario</label>
-                        <input type="number" class="form-control" placeholder="id_usuario" minlength="3" maxlength="25" required name="id_usuario" id="id_usuario" pattern="^[a-zA-Záéíóú ]{1,30}">
-                      </div>
+                        <label>Usuario : </label>
+                        <label class="hidden-xs"><?php  echo $_SESSION["nombre"]; ?></label>
+                       </div>
                     </div>
 
                   
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Estado</label>
-                        <select type="number"class="form-control" name="estado" id="estado">
-                          <option value="1">Activo</option>
-                        </select>
-                      </div>
-                    </div>
                     
 
                   <div class="">
