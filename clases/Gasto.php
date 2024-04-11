@@ -208,6 +208,35 @@ class Gasto{
 
     }
 
+    //--------------------------------------------------------------------------------------------------------------------------
+    //Funcion editar gasto
+
+    public function EditarGasto($tipo,$descripcion,$monto,$fecha,$id_gasto){ 
+
+    
+
+            $conexion = new conexion();
+    
+            $conexion->conectar();
+    
+            $sql = "update gastos set tipo_gasto=?, descripcion=?, monto=?, fecha=? where id_gasto=?";
+    
+            $ejecutar = $conexion->db->prepare($sql);
+    
+            $ejecutar->bind_param('ssisi',$tipo,$descripcion,$monto,$fecha,$id_gasto);
+    
+            $ejecutar->execute();
+    
+            $conexion->desconectar();
+    
+    
+
+
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------
+    
+
 
 }
 

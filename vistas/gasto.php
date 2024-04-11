@@ -89,15 +89,15 @@ include("layout/nav.php");
                      echo "<td><h4><span class='badge bg-success'>Ingresado</span></h4></td>";
                     }
                     echo "<td>
-                 <a type='submit' href='' title='Editar' class='btn btn-warning'>
-                 <i class='fa fa-edit'></i>
-                 </a> &nbsp;&nbsp;"; 
+                   <a type='submit' class='btn btn-warning' title='Visualizar' id='' href='gasto_editar.php?id=$id'>
+                   <i class='fa fa-edit'></i>
+                   </a>&nbsp;&nbsp;"; 
 
                
                    echo"<a type='submit' class='btn btn-primary' title='Visualizar' id='' href='gasto_visualizar.php?id=$id'>
                    <i class='fas fa-eye'></i>
-                   </a>&nbsp;&nbsp;"; 
-                   
+                   </a> 
+                   </td>";
                  
 
 
@@ -141,3 +141,4 @@ include("layout/footer.php");
 
 
 ?>
+

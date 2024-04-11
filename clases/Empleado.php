@@ -333,6 +333,39 @@ class Empleado{
    
    
        }
+
+       //--------------------------------------------------------------------------------------------------------------------
+       //Buscar emplado gasto
+       
+       public function Empleadolista(){
+
+        $conexion = new conexion();
+
+        $conexion->conectar();
+
+        $empleadoArray = array();
+        
+        $sql = "select Id_Empleado, Nombre,Apellido FROM empleado where estado=1 ORDER BY Nombre AND Apellido ASC";
+
+        $ejecutar = mysqli_query($conexion->db,$sql);
+   
+        while($fila = mysqli_fetch_array($ejecutar)){
+   
+           $empleadoIndex = new Empleado();
+   
+            $empleadoIndex->setIdempleado($fila[0]);
+            $empleadoIndex->setNombre($fila[1]);
+            $empleadoIndex->setApellido($fila[2]);
+   
+            array_push($empleadoArray,$empleadoIndex);
+   
+       }
+   
+       $conexion->desconectar();
+       
+       return $empleadoArray;
+
+    }
    
 
 
