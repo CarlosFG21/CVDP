@@ -1,6 +1,6 @@
 <?php
 
-include("../db/conexion.php");
+include("../clases/Persona.php");
 
 class Venta{
 
@@ -108,17 +108,37 @@ class Venta{
     //------------------------------------------------------------------------------------------------------------------
     //Funcion Guardar Informacion Empleado 
 
-    public function GuardarVenta($id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$impuesto,$total,$pago){
+    public function GuardarVenta($id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$fecha,$descuento,$total,$pago){
 
         $conexion = new conexion();
 
         $conexion->conectar();
         $estado = 1;
-        $sql = "insert into venta(Id_Cliente,Id_Usuario,Tipo_Comprobante,Num_Comprobante,Serie_Comprobante,Impuesto,Total,Pagado,Estado) values(?,?,?,?,?,?,?,?,?,?)";
+        $sql = "insert into venta(Id_Cliente,Id_Usuario,Tipo_Comprobante,Num_Comprobante,Serie_Comprobante,Fecha,Descuento,Total,Pagado,Estado) values(?,?,?,?,?,?,?,?,?,?)";
  
         $ejecutar = $conexion->db->prepare($sql);
         
-        $ejecutar->bind_param('iiisisddii',$id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$impuesto,$total,$pago,$estado);
+        $ejecutar->bind_param('iiisisddii',$id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$fecha,$descuento,$total,$pago,$estado);
+
+        $ejecutar->execute();
+        
+        $conexion->desconectar();
+    }
+
+        //------------------------------------------------------------------------------------------------------------------
+    //Funcion Guardar Informacion Empleado 
+
+    public function GuardarVenta2($id_cliente,$id_usuario,$tipoc){
+
+        $conexion = new conexion();
+
+        $conexion->conectar();
+        $estado = 1;
+        $sql = "insert into venta(Id_Cliente,Id_Usuario,Tipo_Comprobante,Estado) values(?,?,?,?)";
+ 
+        $ejecutar = $conexion->db->prepare($sql);
+        
+        $ejecutar->bind_param('iisi',$id_cliente,$id_usuario,$tipoc,$estado);
 
         $ejecutar->execute();
         
@@ -169,18 +189,18 @@ class Venta{
     //-----------------------------------------------------------------------------------------------------------------------------------
     //Funcion Editar empleados
 
-    public function EditarVenta($id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$impuesto,$total,$pago,$id_venta){ 
+    public function EditarVenta($n_comprobante,$serie,$descuento,$total,$pago,$id_venta){ 
 
 
         $conexion = new conexion();
 
         $conexion->conectar();
 
-        $sql = "update venta set Id_Cliente=?,Id_Usuario=?, Tipo_Comprobante=?, Num_Comprobante=?, Serie_Comprobante=?, Total=?, Pagado=? where id_venta=?";
+        $sql = "update venta set Num_Comprobante=?, Serie_Comprobante=?, Descuento=?, Total=?, Pagado=? where id_venta=?";
 
         $ejecutar = $conexion->db->prepare($sql);
 
-        $ejecutar->bind_param('iisisddii',$id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$impuesto,$total,$pago,$id_venta);
+        $ejecutar->bind_param('isddii',$n_comprobante,$serie,$descuento,$total,$pago,$id_venta);
 
         $ejecutar->execute();
 
@@ -242,7 +262,7 @@ class Venta{
 
         $estado = 0;
 
-        $sql = "update vente set estado=? where id_venta=?";
+        $sql = "update venta set estado=? where id_venta=?";
 
         $ejecutar = $conexion->db->prepare($sql);
 
@@ -279,7 +299,7 @@ class Venta{
 
     }
 
-    public function ValidarVenta($id_cliente,$n_comprobante){   
+    public function ValidarVenta($id_cliente,$id_usuario){   
 
 
         $conexion = new conexion();
@@ -288,16 +308,16 @@ class Venta{
 
         $estado = 0;
 
-        $sql = "select Id_Cliente,Num_Comprobante from venta where Id_Cliente=? and Num_Comprobante=?";
+        $sql = "select Id_Cliente,Id_Usuario from venta where Id_Cliente=? and Id_Usuario=?";
 
         $ejecutar = $conexion->db->prepare($sql);
-        $ejecutar->bind_param('ii',$id_cliente,$n_comprobante);
+        $ejecutar->bind_param('ii',$id_cliente,$id_usuario);
         $ejecutar->execute();
     
         $resultado = $ejecutar->get_result();
 
         while($fila = $resultado->fetch_array(MYSQLI_NUM)){
-            if(strcmp($fila[1],$id_cliente)===0 && strcmp($fila[2],$n_comprobante)===0){
+            if(strcmp($fila[1],$id_cliente)===0 && strcmp($fila[2],$id_usuario)===0){
                 $estado=1;
                 break;
             }
@@ -308,6 +328,31 @@ class Venta{
         return $estado;
     }
 
+    public function ValidarVenta2($id_venta){   
+
+        $conexion = new conexion();
+        $conexion->conectar();
+        $estado = 0;
+
+        $sql = "select Id_Venta from venta where Id_Venta=?";
+
+        $ejecutar = $conexion->db->prepare($sql);
+        $ejecutar->bind_param('i',$id_venta);
+        $ejecutar->execute();
+    
+        $resultado = $ejecutar->get_result();
+
+        while($fila = $resultado->fetch_array(MYSQLI_NUM)){
+            if(strcmp($fila[1],$id_venta)===0){
+                $estado=1;
+                break;
+            }
+        }
+
+        $conexion->desconectar();
+
+        return $estado;
+    }
 
 
 }

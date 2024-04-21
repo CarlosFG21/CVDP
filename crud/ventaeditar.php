@@ -7,26 +7,25 @@ if(isset($_POST["btnEditarVenta"])){
 
 $venta = new Venta();
 
-$id = $_REQUEST['id'];
-$id_cliente = $_POST['id_cliente'];
-$id_usuario = $_POST['id_cliente'];
-$tipoc = $_POST['tipoc'];
-$n_comprobante = $_POST['n_comprobante'];
+$id_venta = $_POST['id_venta'];
+$n_comprobante = $_POST['num_comprobante'];
 $serie = $_POST['serie'];
-$fecha = $_POST['fecha'];
-$total = $_POST['total'];
-$pago = $_POST['pago'];
+$subtotal = $_POST['sub_total'];
+$descuento = $_POST['descuento'];
 
-if($venta->ValidarVenta($id_cliente,$n_comprobante)==0){
 
-$empleado->EditarEmpleado($id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$fecha,$total,$pago,$id);
+if($venta->ValidarVenta2($id_venta)==0){
+    $pago = 1;
+    $total = $subtotal-$descuento;
+    
+$venta->EditarVenta($n_comprobante,$serie,$descuento,$total,$pago,$id_venta);
 
-header("Location: ../vistas/Venta.php");
+header("Location: ../vistas/venta.php");
 
 }else{
 
         
-    header("Location: ../vistas/venta_editar.php?id=$id&mensaje=existe");
+    header("Location: ../vistas/venta_editar.php?id=$id_venta&mensaje=existe");
 
 }
 
