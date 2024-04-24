@@ -116,6 +116,7 @@ include("layout/nav.php");
                       <div class="form-group">
                         <label>Usuario : </label>
                         <label class="hidden-xs"><?php  echo $_SESSION["nombre"]; ?></label>
+                        <input type="number" name="id_usuario" id="id_usuario" class="form-control" value="<?php echo $_SESSION["id"];?>" hidden>
                        </div>
                     </div>
 

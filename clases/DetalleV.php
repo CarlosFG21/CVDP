@@ -387,14 +387,14 @@ class Producto1{
                $productoIndex = new Producto1();
        
                    $productoIndex->setIdproducto($fila[0]);
-                   $productoIndex->setIdetalle($fila[1]);
-                   $productoIndex->setIdcategoria($fila[2]);
-                   $productoIndex->setNombre($fila[3]);
-                   $productoIndex->setDescripcion($fila[4]);
-                   $productoIndex->setCantidad($fila[5]);
-                   $productoIndex->setPrecio($fila[6]);
-                   $productoIndex->setUbicacion($fila[7]);
-                   $productoIndex->setEstado($fila[8]);
+                   //$productoIndex->setIdetalle($fila[1]);
+                   $productoIndex->setIdcategoria($fila[1]);
+                   $productoIndex->setNombre($fila[2]);
+                   $productoIndex->setDescripcion($fila[3]);
+                   $productoIndex->setCantidad($fila[4]);
+                   $productoIndex->setPrecio($fila[5]);
+                   $productoIndex->setUbicacion($fila[6]);
+                   $productoIndex->setEstado($fila[7]);
                    
                 array_push($productoob,$productoIndex);
        
@@ -406,11 +406,149 @@ class Producto1{
        
        
            }
+        //--------------------------------------------------------------------------------------------------------------------
+        //Funcion mostrar los empleados registrados
+    
+        //------------------------------------------------------------------------------------------------------------------
+    //Funcion para buscar las personas
+
+    public function BuscarProducto1($idproducto){
+
+        $conexion = new conexion();
+        $conexion->conectar();
+
+        $productoArray = new Producto1();
+        $sql = "select * from producto where id_producto=?";
+
+        $ejecutar = $conexion->db->prepare($sql);
+
+        $ejecutar->bind_param('i',$idproducto);
+
+        $ejecutar->execute();
+
+        $resultado = $ejecutar->get_result();
+
+        while($fila = $resultado->fetch_array(MYSQLI_NUM)){
+
+            $productoArray->setIdproducto($fila[0]);
+            $productoArray->setNombre($fila[2]);
+            $productoArray->setPrecio($fila[5]); 
+
+        }
+
+        $conexion->desconectar();
+
+        return $productoArray;
+
+    }
            
        
     }
     
+    class Usuario{
+        public $clave;
+        public $estado;
+        public $idrol;
+        public $idusuario;
+        public $nombre;
     
-  
+        //creacion de los metodos get y set
     
+        //----------------------------------------------------------------------------------
+    
+        //metodo get y set clave
+    
+        public function getClave(){
+            return $this->clave;
+        }
+    
+        public function setClave($_clave1){
+            $this->clave = $_clave1;
+        }
+    
+    
+        //----------------------------------------------------------------------------------
+        
+        //metodo get y set estado
+    
+        public function getEstado(){
+            return $this->estado;
+        }
+    
+        public function setEstado($_estado1){
+            $this->estado = $_estado1;
+        }
+    
+    
+        //---------------------------------------------------------------------------
+    
+        //metodo get y set id rol
+    
+        public function getIdrol(){
+           return $this->idrol;
+        }
+    
+        public function setIdrol($_idrol1){
+            $this->idrol = $_idrol1;
+        }
+    
+        //-----------------------------------------------------------------------------
+    
+        //metodo get y set id usuario
+    
+        public function getIdusuario(){
+    
+            return $this->idusuario;
+        }
+    
+        public function setIdusuario($_idusuario1){
+            $this->idusuario = $_idusuario1;
+        
+        }
+    
+        //------------------------------------------------------------------------------------
+         
+    
+        //metodo get y set nombre 
+    
+        public function getNombre(){
+            return $this-> nombre;
+    
+        }
+    
+        public function setNombre($_nombre1){
+            $this->nombre = $_nombre1;
+        }
+    
+   
+//funcion visualizar Usuarios
+public function ObtenerUsuarios(){
+        
+    $conexion = new conexion();
+    $conexion->conectar();
+
+    $resultadoUsuarios = array();
+
+    $sql = "SELECT u.Id_Usuario, r.Nombre, u.Nombre, u.Clave, u.Estado FROM usuario u JOIN rol r on u.Id_Rol=r.Id_Rol";
+    $ejecutar = mysqli_query($conexion->db,$sql);
+
+    while($fila = mysqli_fetch_array($ejecutar)){
+
+        $usuarioIndex = new Usuario();
+
+        $usuarioIndex->setIdusuario($fila[0]);
+        $usuarioIndex->setIdrol($fila[1]);
+        $usuarioIndex->setNombre($fila[2]);
+        $usuarioIndex->setClave($fila[3]);
+        $usuarioIndex->setEstado($fila[4]);
+
+        array_push($resultadoUsuarios,$usuarioIndex);
+
+    }
+
+    $conexion->desconectar();
+    
+    return $resultadoUsuarios;
+    }    
+}    
 ?>

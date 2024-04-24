@@ -9,7 +9,7 @@ class Venta{
     public $id_cliente;
     public $id_usuario;
     public $id_venta;
-    public $impuesto;
+    public $descuento;
     public $n_comprobante;
     public $pago;
     public $serie;
@@ -57,12 +57,12 @@ class Venta{
         $this->id_venta = $_idventa;
     }
 
-    public function getImpuesto(){
-        return $this->impuesto;
+    public function getDescuento(){
+        return $this->descuento;
     }
 
-    public function setImpuesto($_impuesto1){
-        $this->impuesto = $_impuesto1;
+    public function setDescuento($_descuento1){
+        $this->descuento = $_descuento1;
     }
 
     public function getComprobante(){
@@ -171,6 +171,7 @@ class Venta{
             $ventaIndex->setComprobante($fila[4]);
             $ventaIndex->setSerie($fila[5]);
             $ventaIndex->setFecha($fila[6]);
+            $ventaIndex->setDescuento($fila[7]);
             $ventaIndex->setTotal($fila[8]);
             $ventaIndex->setPago($fila[9]);
             $ventaIndex->setEstado($fila[10]);
