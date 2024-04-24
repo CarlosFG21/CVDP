@@ -45,7 +45,7 @@ include("layout/nav.php");
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Id Cliente</th>
+                    <th>Nombre Cliente</th>
                     <th>Id Usuario</th>
                     <th>Tipo Comprobante</th>
                     <th>No. Comprobante</th>
@@ -75,11 +75,13 @@ include("layout/nav.php");
                     $total = $ventaArray[$i]->getTotal();
                     $pago = $ventaArray[$i]->getPago();
                     $estado = $ventaArray[$i]->getEstado();
-
+                    $cliente = new Persona();
+                    $clienteArray = $cliente->BuscarPersona($idcliente);
+                    $nombre_cliente = $clienteArray->getNombre();
                     echo "<tr>";
                          
                     echo "<td>$id</td>
-                         <td>$idcliente</td>
+                         <td>$nombre_cliente</td>
                          <td>$idusuario</td>
                          <td>$tipoc</td>
                          <td>$comprobante</td>
@@ -97,10 +99,9 @@ include("layout/nav.php");
                     }
                     
                     echo "<td>
-                 <a type='submit' href='venta_editar.php?id=$id' title='Editar' class='btn btn-warning'>
-                 <i class='fa fa-edit'></i>
-                 </a> &nbsp;&nbsp;"; 
-
+                    <a type='submit' href='../ticket/Vista.php?id=$id'class='btn bg-gradient-primary' title='Visualizar Venta'>
+                    <i class='fas fa-eye'></i> 
+                    </a>&nbsp;&nbsp;";
                  if($estado==1){
                    echo"<a type='submit' class='btn btn-success' title='Eliminar' id='btnEliminarVenta' href='../crud/eliminarventa.php?id=$id'>
                    <i class='fas fa-trash'></i>
@@ -111,8 +112,9 @@ include("layout/nav.php");
                    <i class='fa fa-share-square'></i>
                    </a>&nbsp;&nbsp;"; 
                    }
-                   echo "<a type='submit' href='venta_visualizar.php?id=$id'class='btn bg-gradient-primary' title='Visualizar'>
-                   <i class='fas fa-eye'></i> 
+                   
+                   echo "<a type='submit' href='../ticket/ticket.php?id=$id'class='btn bg-gradient-orange' title='ticket'>
+                   <i class='fas fa-tag'></i> 
                    </a></td>";
 
 
