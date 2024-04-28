@@ -1,6 +1,7 @@
 <?php
     include("layout/header.php");
     include("layout/nav.php");
+    include("../clases/Usuario.php");
 ?>
 
 <!DOCTYPE html>
@@ -47,8 +48,16 @@
                                         <div class="form-group">
                                             <label for="sl_rol">Rol de Usuario</label>
                                             <select name="sl_rol" id="sl_rol" name="sl_rol" class="form-control">
-                                                <option value="1">Administrador</option>
-                                                <option value="2">Usuario</option>
+                                            <?php
+                                                $usuario = new Usuario();
+                                                $usuarioArray = $usuario->ObtenerRoles();
+
+                                                for($i=0; $i<sizeof($usuarioArray); $i++){
+                                                    $id = $usuarioArray[$i]->getIdrol();
+                                                    $nombre = $usuarioArray[$i]->getNombre();
+                                                    echo '<option value='.$id.'>'.$nombre.'</option>';
+                                                }
+                                            ?>
                                             </select>
                                         </div>
                                     </div>
@@ -82,8 +91,6 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-12">
-
-                                        <!--table id="bootstrap-data-table" class="table table-striped table-bordered"-->
                                         <table id="example1"
                                             class="table table-bordered table-striped dataTable dtr-inline"
                                             aria-describedby="example1_info">
@@ -100,7 +107,6 @@
                                             <tbody>
 
                                                 <?php
-                                                include("../clases/Usuario.php");
                                                 $usuario = new Usuario();
                                                 $usuarioArray = $usuario->ObtenerUsuarios();
 

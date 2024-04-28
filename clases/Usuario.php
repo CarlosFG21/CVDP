@@ -228,7 +228,30 @@ class Usuario{
     
         return $count > 0;
     }
+
     
+
+    public function ObtenerRoles(){
+        
+        $conexion = new conexion();
+        $conexion->conectar();
+
+        $resultadoRol = array();
+        $sql = "SELECT Id_Rol, Nombre FROM rol";
+        $ejecutar = mysqli_query($conexion->db,$sql);
+
+        while($fila = mysqli_fetch_array($ejecutar)){
+
+            $rolIndex = new Usuario();
+            $rolIndex->setIdrol($fila[0]);
+            $rolIndex->setNombre($fila[1]);
+            array_push($resultadoRol,$rolIndex);
+        }
+
+        $conexion->desconectar();        
+        return $resultadoRol;
+    }
+
 
 }
 
