@@ -1,7 +1,7 @@
 <?php 
 	session_start();
 	$usuario = $_SESSION['nombre'];
-  $tipo = $_SESSION['tipo'];
+    $tipo = $_SESSION['tipo'];
 
 	if (isset($_SESSION['nombre'])) {
 ?>
@@ -103,7 +103,7 @@
                           //matriz de elementos de menú comunes para todos los usuarios
                           $commonMenuItems = array(
                               array('href' => 'index.php', 'icon' => 'fa fa-home', 'text' => 'Inicio'),
-                              array('href' => 'compras.php', 'icon' => 'fa fa-shopping-bag', 'text' => 'Compras')
+                              array('href' => 'compra.php', 'icon' => 'fa fa-shopping-bag', 'text' => 'Compras')
                           );
 
                           //matriz de elementos de menú para administradores
@@ -111,7 +111,13 @@
                               array('href' => 'categoria_producto.php', 'icon' => 'fas fa-braille', 'text' => 'Categoria Productos'),
                               array('href' => 'persona.php', 'icon' => 'fas fa-male', 'text' => 'Clientes / Proveedores'),
                               array('href' => 'rol.php', 'icon' => 'fas fa-clone', 'text' => 'Roles'),
-                              array('href' => 'usuario.php', 'icon' => 'fas fa-user', 'text' => 'Usuarios')
+                              array('href' => 'usuario.php', 'icon' => 'fas fa-user', 'text' => 'Usuarios'),
+                              array('href' => 'empleado.php', 'icon' => 'fas fa-user', 'text' => 'Empleado'),
+                              array('href' => 'gasto.php', 'icon' => 'fas fa-user', 'text' => 'Gastos'),
+                              array('href' => 'persona.php', 'icon' => 'fas fa-user', 'text' => 'Persona'),
+                              array('href' => 'planilla.php', 'icon' => 'fas fa-user', 'text' => 'Planilla'),
+                              array('href' => 'producto.php', 'icon' => 'fas fa-user', 'text' => 'Producto'),
+                              array('href' => 'venta.php', 'icon' => 'fas fa-user', 'text' => 'Venta')
                           );
 
                           // Iterar sobre los elementos de menú comunes y generar HTML
