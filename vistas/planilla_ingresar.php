@@ -65,7 +65,7 @@ include("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Seleccione un empleado</label>
-                        <select class="form-control select2" name="lista1" id="lista1">
+                        <select class="form-control" name="lista1" id="lista1">
 
                         <?php
                         include("../clases/Empleado.php");

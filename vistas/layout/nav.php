@@ -112,12 +112,11 @@
                               array('href' => 'persona.php', 'icon' => 'fas fa-male', 'text' => 'Clientes / Proveedores'),
                               array('href' => 'rol.php', 'icon' => 'fas fa-clone', 'text' => 'Roles'),
                               array('href' => 'usuario.php', 'icon' => 'fas fa-user', 'text' => 'Usuarios'),
-                              array('href' => 'empleado.php', 'icon' => 'fas fa-user', 'text' => 'Empleado'),
-                              array('href' => 'gasto.php', 'icon' => 'fas fa-user', 'text' => 'Gastos'),
-                              array('href' => 'persona.php', 'icon' => 'fas fa-user', 'text' => 'Persona'),
-                              array('href' => 'planilla.php', 'icon' => 'fas fa-user', 'text' => 'Planilla'),
-                              array('href' => 'producto.php', 'icon' => 'fas fa-user', 'text' => 'Producto'),
-                              array('href' => 'venta.php', 'icon' => 'fas fa-user', 'text' => 'Venta')
+                              array('href' => 'empleado.php', 'icon' => 'fas fa-child', 'text' => 'Empleado'),
+                              array('href' => 'gasto.php', 'icon' => 'fas fa-university', 'text' => 'Gastos'),
+                              array('href' => 'planilla.php', 'icon' => 'fas fa-file', 'text' => 'Planilla'),
+                              array('href' => 'producto.php', 'icon' => 'fas fa-table', 'text' => 'Producto'),
+                              array('href' => 'venta.php', 'icon' => 'fas fa-id-card', 'text' => 'Venta')
                           );
 
                           // Iterar sobre los elementos de menú comunes y generar HTML
