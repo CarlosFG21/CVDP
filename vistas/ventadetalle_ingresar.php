@@ -222,6 +222,22 @@ include("../clases/DetalleV.php");
                                                        <input type="number" name="precio_producto2" id="precio_producto2" class="form-control" hidden>
                                                    </div>
                                                </div>
+                                               <script>
+                                                     document.addEventListener("DOMContentLoaded", function() {
+                                                    var cantidadInput = document.getElementById('cantidad_v');
+                                                    var cantidadDisponibleInput = document.getElementById('cantidad_producto');
+
+                                                    cantidadInput.addEventListener('input', function() {
+                                                    var cantidad = parseInt(cantidadInput.value);
+                                                    var cantidadDisponible = parseInt(cantidadDisponibleInput.value);
+
+                                                    if (cantidad > cantidadDisponible) {
+                                                    alert('La cantidad ingresada es mayor que la cantidad disponible');
+                                                    cantidadInput.value = cantidadDisponible; // Restablecer la cantidad al máximo disponible
+                                                }
+                                                });
+                                                });
+                                                </script>
                                             
                                                
                                            </div> 
