@@ -44,8 +44,8 @@
 <script src="../app/AdminLTE-3.2.0/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../app/AdminLTE-3.2.0/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../app/AdminLTE-3.2.0/dist/js/demo.js"></script>
+<!-- AdminLTE for demo purposes
+<script src="../app/AdminLTE-3.2.0/dist/js/demo.js"></script>-->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../app/AdminLTE-3.2.0/dist/js/pages/dashboard.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>

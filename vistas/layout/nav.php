@@ -103,7 +103,7 @@
                           //matriz de elementos de menú comunes para todos los usuarios
                           $commonMenuItems = array(
                               array('href' => 'index.php', 'icon' => 'fa fa-home', 'text' => 'Inicio'),
-                              array('href' => 'compra.php', 'icon' => 'fa fa-shopping-bag', 'text' => 'Compras')
+                              array('href' => 'venta.php', 'icon' => 'fas fa-id-card', 'text' => 'Venta')
                           );
 
                           //matriz de elementos de menú para administradores
@@ -116,7 +116,8 @@
                               array('href' => 'gasto.php', 'icon' => 'fas fa-university', 'text' => 'Gastos'),
                               array('href' => 'planilla.php', 'icon' => 'fas fa-file', 'text' => 'Planilla'),
                               array('href' => 'producto.php', 'icon' => 'fas fa-table', 'text' => 'Producto'),
-                              array('href' => 'venta.php', 'icon' => 'fas fa-id-card', 'text' => 'Venta')
+                              array('href' => 'compra.php', 'icon' => 'fa fa-shopping-bag', 'text' => 'Compras')
+                              
                           );
 
                           // Iterar sobre los elementos de menú comunes y generar HTML
