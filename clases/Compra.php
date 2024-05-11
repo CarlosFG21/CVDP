@@ -183,11 +183,11 @@ public function BuscarCompra($conexion,$id_compra) {
         $compra->setIdproveedor($fila[2]);
         $compra->setTipo($fila[3]);
         $compra->setComprobante($fila[4]);
-        $compra->setSerie($fila[4]);
-        $compra->setFecha($fila[4]);
-        $compra->setImpuesto($fila[4]);
-        $compra->setTotal($fila[4]);
-        $compra->setEstado($fila[4]);
+        $compra->setSerie($fila[5]);
+        $compra->setFecha($fila[6]);
+        $compra->setImpuesto($fila[7]);
+        $compra->setTotal($fila[8]);
+        $compra->setEstado($fila[9]);
         //$compraArray[] = $compra; // Agrega el objeto Usuario al array
     }
 
