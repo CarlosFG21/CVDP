@@ -12,10 +12,11 @@ $n_comprobante = $_POST['num_comprobante'];
 $serie = $_POST['serie'];
 $subtotal = $_POST['sub_total'];
 $descuento = $_POST['descuento'];
+$pago = $_POST['pago'];
 
 
 if($venta->ValidarVenta2($id_venta)==0){
-    $pago = 1;
+    
     $total = $subtotal-$descuento;
     
 $venta->EditarVenta($n_comprobante,$serie,$descuento,$total,$pago,$id_venta);

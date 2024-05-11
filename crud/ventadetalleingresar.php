@@ -13,6 +13,7 @@ $ventaD = new DetalleV();
 if(isset($_POST["btnGuardarDetalleVenta"])){
     $estado = 1;
     $subtotal = $cantidad_Medida * $precio_producto;
+    $subtotal = round($subtotal, 2);
   if($ventaD->ValidarDetalleV($id_venta,$id_producto)==0){
     
   $ventaD->GuardarDetalleV($id_venta,$id_producto,$cantidad_Medida,$Unidad_medida,$subtotal,$estado);

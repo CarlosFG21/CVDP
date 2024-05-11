@@ -9,7 +9,7 @@ include("layout/header.php");
 <?php
 
 include("layout/nav.php");
-include("../clases/DetalleV.php");
+include("../clases/DetalleCotizacion.php");
 
 
 ?>
@@ -21,7 +21,7 @@ include("../clases/DetalleV.php");
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1 class="m-0">Registro de una nueva venta</h1>
+                    <h1 class="m-0">Registro de una nueva cotización</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -39,7 +39,7 @@ include("../clases/DetalleV.php");
                        <div class="col-md-12">
                            <div class="card card-warning">
                                <div class="card-header">
-                                   <h3 class="card-title">Venta</h3>
+                                   <h3 class="card-title">Cotización</h3>
                                    <div class="card-tools">
                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                                        </button>
@@ -81,9 +81,9 @@ include("../clases/DetalleV.php");
                                                                </thead>
                                                                <tbody>
                                                                <?php
-                                                               $ventaID = new DetalleV();
-                                                               $ultimoIdVenta = $ventaID->ObtenerUltimoIdVenta();
-                                                                $productoob = new Producto1();
+                                                               $cotizacionID = new DetalleCotizacion();
+                                                               $ultimoIdcotizacion = $cotizacionID->ObtenerUltimoIdCotizacion();
+                                                                $productoob = new Producto2();
                                                                 $productoArray = $productoob->ObtenerProducto();
 
                                                                 for($i=0; $i<sizeof($productoArray); $i++){
@@ -133,8 +133,8 @@ include("../clases/DetalleV.php");
                                                                                    var precio_productos2 = '<?php echo $precio_producto; ?>';
                                                                                    document.getElementById('precio_producto2').value = precio_productos2;
 
-                                                                                   var id_venta = '<?php echo $ultimoIdVenta; ?>';
-                                                                                   document.getElementById('id_venta').value = id_venta;
+                                                                                   var id_cotizacion = '<?php echo $ultimoIdcotizacion; ?>';
+                                                                                   document.getElementById('id_cotizacion').value = id_cotizacion;
 
                                                                                    modal2.style.display = "none"; 
                                                                                };
@@ -159,7 +159,7 @@ include("../clases/DetalleV.php");
                                        <!-- /.modal -->
                                    </div>
                                    <hr>
-                                   <form role="form" method="post" action="../crud/ventadetalleingresar.php">
+                                   <form role="form" method="post" action="../crud/cotizaciondetalleingresar.php">
                                    <div class="container-fluid" style="font-size: 12px">
                                        <div class="row">
                                                 
@@ -167,7 +167,7 @@ include("../clases/DetalleV.php");
                                                    <div class="form-group">
                                                        <label for="">codigo:</label>
                                                        <input type="text" class="form-control" id="id_producto1" disabled>
-                                                       <input type="number" class="form-control" name="id_venta" id="id_venta" hidden>
+                                                       <input type="number" class="form-control" name="id_cotizacion" id="id_cotizacion" hidden>
                                                        <input type="number" class="form-control" name="id_producto" id="id_producto" hidden>
                                                    </div>
                                                </div>
@@ -243,7 +243,7 @@ include("../clases/DetalleV.php");
                                                
                                            </div> 
                                            <div class=""><center>
-                                                <input type="submit" value="Agregar Producto" class="btn btn-success" name="btnGuardarDetalleVenta" id="btnGuardarDetalleVenta">
+                                                <input type="submit" value="Agregar Producto" class="btn btn-success" name="btnGuardarDetalleCotizacion" id="btnGuardarDetalleCotizacion">
                                                 </center>
                                             </div>    
 
@@ -263,7 +263,7 @@ include("../clases/DetalleV.php");
                        <div class="col-md-50">
                            <div class="card card-outline card-primary">
                                <div class="card-header">
-                                   <h3 class="card-title">Detalle de la venta</h3>
+                                   <h3 class="card-title">Detalle de la cotización</h3>
                                    <div class="card-tools">
                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                            <i class="fas fa-minus"></i>
@@ -271,7 +271,7 @@ include("../clases/DetalleV.php");
                                    </div>
 
                                </div>
-                               <form role="form" method="post" action="../crud/ventaeditar.php">
+                               <form role="form" method="post" action="../crud/cotizacioneditar.php">
                                <div class="card-body">
                                    <div class="row">
                                     
@@ -293,28 +293,28 @@ include("../clases/DetalleV.php");
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                    $ventaID2 = new DetalleV();
-                                                    $ultimoIdVenta2 = $ventaID2->ObtenerUltimoIdVenta();
-                                                    $detallevob = new DetalleV();
-                                                    $detallevArray = $detallevob->ObtenerDetalleV();
+                                                    $cotizacionID2 = new DetalleCotizacion();
+                                                    $ultimoIdcotizacion2 = $cotizacionID2->ObtenerUltimoIdCotizacion();
+                                                    $detallecotob = new DetalleCotizacion();
+                                                    $detallecotArray = $detallecotob->ObtenerDetalleCotizacion();
 
-                                                    for($i=0; $i<sizeof($detallevArray); $i++){
-                                                        $id_detallev = $detallevArray[$i]->getIdetallev();
-                                                        $id_producto = $detallevArray[$i]->getIdproducto();
-                                                        $id_venta = $detallevArray[$i]->getIdventa();
-                                                        $cantidad_medida = $detallevArray[$i]->getCantidadm();
-                                                        $precio_venta = $detallevArray[$i]->getPrecio();
-                                                        $estado = $detallevArray[$i]->getEstado();
-                                                        if($id_venta == $ultimoIdVenta2){
+                                                    for($i=0; $i<sizeof($detallecotArray); $i++){
+                                                        $id_detallecotizacion = $detallecotArray[$i]->getIdetallecotizacion();
+                                                        $id_producto = $detallecotArray[$i]->getIdproducto();
+                                                        $id_cotizacion = $detallecotArray[$i]->getIdcotizacion();
+                                                        $cantidad_medida = $detallecotArray[$i]->getCantidadm();
+                                                        $precio_cotizacion = $detallecotArray[$i]->getPrecio();
+                                                        $estado = $detallecotArray[$i]->getEstado();
+                                                        if($id_cotizacion == $ultimoIdcotizacion2){
                                                             if($estado == 1){
                                                             
                                                         ?>
                                                     <tr>
                                                     <td><center><?php echo $id_producto; ?></center></td>
                                                     <td><center><?php echo $cantidad_medida;?></center></td>
-                                                    <td><center><?php echo "Q.".$precio_venta;?></center></td>
+                                                    <td><center><?php echo "Q.".$precio_cotizacion;?></center></td>
                                                     <td><center>
-                                                        <a href="../crud/eliminardetalleventa.php?id=<?php echo $id_detallev; ?>&idproducto=<?php echo $id_producto; ?>&cantidadp=<?php echo $cantidad_medida; ?>" class="btn btn-danger" >
+                                                        <a href="../crud/eliminardetallecotizacion.php?id=<?php echo $id_detallecotizacion; ?>" class="btn btn-danger" >
                                                                 X
                                                             </a></center>
                                                     </td>
@@ -327,72 +327,45 @@ include("../clases/DetalleV.php");
                                             </table>
                                         </div>
                                         <?php
-                                            $ventaIDF = new DetalleV();
-                                            $ultimoIdVentaF = $ventaIDF->ObtenerUltimoIdVenta();
+                                            $cotizacionIDF = new DetalleCotizacion();
+                                            $ultimoIdcotizacionF = $cotizacionIDF->ObtenerUltimoIdCotizacion();
 
-                                            $ventaob = new Venta();
-                                            $ventaArray = $ventaob->BuscarVenta($ultimoIdVentaF);
+                                            $cotizacionob = new cotizacion();
+                                            $cotizacionArray = $cotizacionob->BuscarCotizacion($ultimoIdcotizacionF);
 
-                                            $id_venta = $ventaArray->getIdventa();
-                                            $fecha = $ventaArray->getFecha();
-                                            $num_comprobante = $ventaArray->getComprobante();
-                                            $serie = $ventaArray->getSerie();
+                                            $id_cotizacion = $cotizacionArray->getIdcotizacion();
+                                            $fecha = $cotizacionArray->getFecha();
                                             
                                             
                                         ?>
                                         <div class="col-md-12">
                                            <div class="form-group">
-                                               <label for="">Número de la venta</label>
+                                               <label for="">Número de la cotización</label>
                                                <?php echo "
-                                               <input type='text' style='text-align: center' value='$id_venta'class='form-control' disabled>
-                                               <input type='text'  value='$id_venta' name='id_venta' id='id_venta' hidden>";?>
+                                               <input type='text' style='text-align: center' value='$id_cotizacion'class='form-control' disabled>
+                                               <input type='text'  value='$id_cotizacion' name='id_cotizacion' id='id_cotizacion' hidden>";?>
                                            </div>
                                        </div>
 
                                        <div class="col-md-12">
                                            <div class="form-group">
-                                               <label for="">Fecha de la venta</label>
+                                               <label for="">Fecha de la cotización</label>
                                                <?php echo "
                                                <input type='text' class='form-control' id='fecha_venta'  value='$fecha' disabled>
                                                <input type='text' class='form-control' value='$fecha' name='fecha_venta' id='fecha_venta' hidden>";?>
                                            </div>
                                        </div>
 
-                                       <div class="col-md-12">
-                                           <div class="form-group">
-                                               <label for="">Numero del Comprobante</label>
-                                               <?php echo "
-                                               <input type='number' style='text-align: center' value='$id_venta'class='form-control' disabled>
-                                               <input type='number'  value='$id_venta' name='num_comprobante' id='num_comprobante' hidden>";?>
-                                           </div>
-                                       </div>
-                                       <div class="col-md-12">
-                                           <div class="form-group">
-                                               <label for="">Serie del Comprobante</label>
-                                               <?php echo "
-                                               <input type='text' style='text-align: center' value='S-$id_venta'class='form-control' disabled>
-                                               <input type='text'  value='S-$id_venta' name='serie' id='serie' hidden>";?>
-                                           </div>
-                                       </div>
-                                       <div class="col-md-12">
-                                               <div class="form-group">
-                                                   <label for="">Metodo de pago</label>
-                                                   <select class="form-control" name="pago" id="pago">
-                                                        <option value="1">Efectivo</option>
-                                                        <option value="2">Al credito</option>
-                                                    </select>
-                                               </div>
-                                        </div>
                                        <?php
-                                        $detalleVentaT = new DetalleV();
-                                        $totalVenta = $detalleVentaT->CalcularTotalVenta($id_venta);
+                                        $detallecotizacionT = new DetalleCotizacion();
+                                        $totalcotizacion = $detallecotizacionT->CalcularTotalCotizacion($id_cotizacion);
                                         ?>
                                        <div class="col-md-12">
                                            <div class="form-group">
                                                <label for="">Sub-Total venta</label>
                                                <?php echo "
-                                               <input type='number' style='text-align: center' class='form-control' value='$totalVenta' disabled>
-                                               <input type='number' value='$totalVenta' class='form-control' name='sub_total' id='sub_total'   hidden>";?>
+                                               <input type='number' style='text-align: center' class='form-control' value='$totalcotizacion' disabled>
+                                               <input type='number' value='$totalcotizacion' class='form-control' name='sub_total' id='sub_total'   hidden>";?>
                                            </div>
                                        </div>
                                        <div class="col-md-12">
@@ -407,9 +380,9 @@ include("../clases/DetalleV.php");
                                         // Obtener el valor del descuento
                                         var descuento = parseFloat(document.getElementById('descuento').value);
                                         // Obtener el valor del total de la venta (asumido como 100 por simplicidad)
-                                        var totalVenta = parseFloat(document.getElementById('sub_total').value);
+                                        var totalCotizacion = parseFloat(document.getElementById('sub_total').value);
                                         // Calcular el total general restando el descuento al total de la venta
-                                        var totalGeneral = totalVenta - descuento;
+                                        var totalGeneral = totalCotizacion - descuento;
             
                                          // Mostrar el total de la venta y el total general en los elementos HTML correspondientes
            
@@ -437,7 +410,7 @@ include("../clases/DetalleV.php");
                                    
                                    <div class="col-md-12">
                                        <div class="form-group">
-                                           <button class="btn btn-primary btn-block" name="btnEditarVenta" id="btnEditarVenta">Guardar venta</button>
+                                           <button class="btn btn-primary btn-block" name="btnEditarCotizacion" id="btnEditarCotizacion">Guardar Cotizacion</button>
                                        </div>
                                    </div>
                                   

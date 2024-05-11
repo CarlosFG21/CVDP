@@ -38,6 +38,15 @@ include("layout/nav.php");
             <div class="card">
               <div class="card-header">
               <a type="submit" class="btn btn-success" href="venta_ingresar.php"> <i class="nav-icon fas fa-plus"> Ingresar nueva Venta</i></a>
+              <?php 
+              include("../clases/DetalleV.php");
+              $VentaID = new DetalleV();
+              $id = $VentaID->ObtenerUltimoIdVenta();
+              if($id >= 1){
+                echo "<a type='submit' class='btn btn-warning' href='../reportes/Ultima_Venta.php'> <i class='nav-icon fas fa-plus'> Ultima Venta Realizada</i></a>";
+              }
+              ?>
+              
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -46,13 +55,13 @@ include("layout/nav.php");
                   <tr>
                     <th>ID</th>
                     <th>Nombre Cliente</th>
-                    <th>Id Usuario</th>
+                    
                     <th>Tipo Comprobante</th>
                     <th>No. Comprobante</th>
                     <th>No. Serie</th>
                     <th>Fecha de Venta</th>
                     <th>Total</th>
-                    <th>Pago</th>
+                    <th>Metodo de Pago</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                     
@@ -60,7 +69,7 @@ include("layout/nav.php");
                   </thead>
                   <tbody>
                   <?php
-                  include("../clases/Venta.php");
+                 
                   $ventaob = new Venta();
                   $ventaArray = $ventaob->ObtenerVenta();
                   for($i=0; $i<sizeof($ventaArray); $i++){
@@ -82,15 +91,18 @@ include("layout/nav.php");
                          
                     echo "<td>$id</td>
                          <td>$nombre_cliente</td>
-                         <td>$idusuario</td>
+                         
                          <td>$tipoc</td>
                          <td>$comprobante</td>
                          <td>$serie</td>
                          <td>$fecha</td>
-                         <td>$total</td>
-                         <td>$pago</td>
-                         
+                         <td>Q. $total</td>
                     ";
+                    if($pago==1){
+                      echo "<td><h4><span class='badge bg-info'>Efectivo</span></h4></td>";
+                     }else{
+                      echo "<td><h4><span class='badge bg-warning'>Crédito</span></h4></td>";
+                     }
 
                     if($estado==1){
                      echo "<td><h4><span class='badge bg-success'>Aprobado</span></h4></td>";
