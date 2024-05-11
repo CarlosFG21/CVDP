@@ -91,7 +91,7 @@
                       <div class="form-group">
                         <label>Cantidad</label>
                         <input type="number" class="form-control" placeholder="Cantidad" name="cantidad" id="cantidad"
-                        required required minlength="3" maxlength="7">
+                        required required minlength="1" maxlength="7">
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -99,7 +99,7 @@
                       <div class="form-group">
                         <label>Precio</label>
                         <input type="number" class="form-control" placeholder="Precio" name="precio" id="precio"
-                         required minlength="3" maxlength="15">
+                         required minlength="1" maxlength="9" step="0.1">
                       </div>
                     </div>
                     <div class="col-sm-6">

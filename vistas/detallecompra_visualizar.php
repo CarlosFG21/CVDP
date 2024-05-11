@@ -164,6 +164,13 @@
                                     }
                                   ?>
                                 </tbody>
+                                <tfoot>
+                                  <tr>
+                                    <td colspan="4" align="right">Total:</td>
+                                    <td id="total"><?php echo $total; ?></td>
+                                    <td></td>
+                                  </tr>
+                                </tfoot>
                             </table>
                             <div class="">
                               <a type="submit" class="btn btn-danger" href="compra.php">Regresar</a>
