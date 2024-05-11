@@ -20,7 +20,7 @@ include("../clases/Venta.php");
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1 class="m-0">Registro de una nueva venta</h1>
+                    <h1 class="m-0">Registro de una nueva cotización</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -38,7 +38,7 @@ include("../clases/Venta.php");
                        <div class="col-md-12">
                            <div class="card card-warning">
                                <div class="card-header">
-                                   <h3 class="card-title">Venta</h3>
+                                   <h3 class="card-title">Cotización</h3>
                                    <div class="card-tools">
                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                                        </button>
@@ -49,7 +49,7 @@ include("../clases/Venta.php");
                                
                                <div class="container-fluid" style="font-size: 12px">
                                <div style="display: flex">
-                                       <h5>Datos de la venta </h5>
+                                       <h5>Datos de la cotización </h5>
                                        <div style="width: 20px"></div>
                                        <button type="button" class="btn btn-success" data-toggle="modal"
                                                data-target="#modal-buscar_cliente">
@@ -141,7 +141,7 @@ include("../clases/Venta.php");
                                 </div>
 
                                    <hr>
-                                   <form role="form" method="post" action="../crud/ventaingresar.php">
+                                   <form role="form" method="post" action="../crud/cotizacioningresar.php">
                                    <div class="container-fluid" style="font-size: 12px">
                                        <div class="row">
                                                 <div class="col-md-4">
@@ -172,17 +172,18 @@ include("../clases/Venta.php");
                                             </div>
                                             <div class="col-md-4">
                                                <div class="form-group">
-                                                   <label for="">Tipo de Comprobante</label>
-                                                   <select class="form-control" name="tipoc" id="tipoc">
-                                                        <option>Factura</option>
-                                                        <option>Comprobante pago</option>
+                                                   <label for="">Descripcion de la cotización</label>
+                                                   <select class="form-control" name="descripcion" id="descripcion">
+                                                        <option>Cotización para Contrución General</option>
+                                                        <option>Cotización para Construción Personal</option>
+                                                        <option>Cotización para Construción Empresarial</option>
                                                     </select>
                                                </div>
                                            </div>          
                                        </div>     
                                        <div class="col-md-12"><center>
-                                                <input type="submit" value="Agregar cliente a la venta" class="btn btn-primary" name="btnGuardarVenta" id="btnGuardarVenta">
-                                                <a type="submit" class="btn btn-danger" href="venta.php">Regresar</a></center>
+                                                <input type="submit" value="Agregar cliente a la cotización" class="btn btn-primary" name="btnGuardarCotizacion" id="btnGuardarCotizacion">
+                                                <a type="submit" class="btn btn-danger" href="Cotizacion.php">Regresar</a></center>
                                             </div>   
                                    </div>
                                    <hr>
@@ -199,7 +200,7 @@ include("../clases/Venta.php");
                        <div class="col-md-12">
                            <div class="card card-outline card-primary">
                                <div class="card-header">
-                                   <h3 class="card-title">Detalle de la venta</h3>
+                                   <h3 class="card-title">Detalle de la Cotización</h3>
                                    <div class="card-tools">
                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                            <i class="fas fa-minus"></i>
@@ -213,7 +214,7 @@ include("../clases/Venta.php");
                                        <div class="col-md-12">
                                            <div class="form-group">
                                                
-                                               <label for="">Número de la venta</label>
+                                               <label for="">Número de la cotizacion</label>
                                                <div id="listado"></div>
                                                <input type="text" style="text-align: center" class="form-control" disabled>
                                                <input type="text"  id="id_venta" hidden>
@@ -222,36 +223,15 @@ include("../clases/Venta.php");
 
                                        <div class="col-md-12">
                                            <div class="form-group">
-                                               <label for="">Fecha de la venta</label>
+                                               <label for="">Fecha de la cotización</label>
                                                <input type="date" class="form-control" id="fecha_venta" disabled>
                                            </div>
                                        </div>
 
-                                       <div class="col-md-12">
-                                           <div class="form-group">
-                                               <label for="">Numero del Comprobante</label>
-                                               <input type="text" class="form-control" id="num_comprobante" disabled>
-                                           </div>
-                                       </div>
-                                       <div class="col-md-12">
-                                           <div class="form-group">
-                                               <label for="">Serie del Comprobante</label>
-                                               <input type="text" class="form-control" id="num_comprobante" disabled>
-                                           </div>
-                                       </div>
-                                       <div class="col-md-4">
-                                               <div class="form-group">
-                                                   <label for="">Metodo de pago</label>
-                                                   <select class="form-control" name="pago" id="pago">
-                                                        <option value="1">Efectivo</option>
-                                                        <option value="2">Al credito</option>
-                                                    </select>
-                                               </div>
-                                        </div>
 
                                        <div class="col-md-12">
                                            <div class="form-group">
-                                               <label for="">Sub-Total venta</label>
+                                               <label for="">Sub-Total Cotización</label>
                                                <input type="text" class="form-control" id="precio_venta"disabled>
                                            </div>
                                        </div>
@@ -275,7 +255,7 @@ include("../clases/Venta.php");
 
                                    <div class="col-md-12">
                                        <div class="form-group">
-                                           <button class="btn btn-success btn-block" id="btn_guardar_venta">Generar venta</button>
+                                           <button class="btn btn-success btn-block" id="btn_guardar_cotizacion">Generar cotización</button>
                                        </div>
                                    </div>
                                   

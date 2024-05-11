@@ -1,16 +1,16 @@
 <?php
 
-include("../Clases/Venta.php");
+include("../Clases/Cotizacion.php");
 
-class DetalleV{
+class DetalleCotizacion{
 
 public $cantidad;
 public $cantidad_medida;
 public $descuento;
 public $estado;
-public $id_detallev;
+public $id_detallecotizacion;
 public $id_producto;
-public $id_venta;
+public $id_cotizacion;
 public $unidad_medida;
 public $precio;
 
@@ -46,11 +46,11 @@ public function setEstado($_estado1){
 }
 
 
-public function getIdetallev(){
-    return $this->id_detallev;
+public function getIdetallecotizacion(){
+    return $this->id_detallecotizacion;
 }
-public function setIdetallev($_idetallev){
-    $this->id_detallev = $_idetallev;
+public function setIdetallecotizacion($id_detallecotizacion){
+    $this->id_detallecotizacion = $id_detallecotizacion;
 }
 
 
@@ -62,11 +62,11 @@ public function setIdproducto($_idproducto){
 }
 
 
-public function getIdventa(){
-    return $this->id_venta;
+public function getIdcotizacion(){
+    return $this->id_cotizacion;
 }
-public function setIdventa($_idventa){
-    $this->id_venta = $_idventa;
+public function setIdcotizacion($_idcotizacion){
+    $this->id_cotizacion = $_idcotizacion;
 }
 
 
@@ -87,17 +87,17 @@ public function setPrecio($_unidadm){
 //------------------------------------------------------------------------------------------------------------------
 //Funcion Guardar Informacion detalle venta
 
-public function GuardarDetalleV($id_venta,$id_producto,$cantidad_medida,$unidad_medida,$precio){
+public function GuardarDetalleCotizacion($id_cotizacion,$id_producto,$cantidad_medida,$unidad_medida,$precio){
 
     $conexion = new conexion();
 
     $conexion->conectar();
     $estado=1;
-    $sql = "insert into detalle_venta(Id_Venta,Id_Producto,Cantidad_Medida,Unidad_Medida,Precio,Estado) values(?,?,?,?,?,?)";
+    $sql = "insert into detalle_cotizacion(Id_Cotizacion,Id_Producto,Cantidad_Medida,Unidad_Medida,Precio,Estado) values(?,?,?,?,?,?)";
 
     $ejecutar = $conexion->db->prepare($sql);
     
-    $ejecutar->bind_param('iidsdi',$id_venta,$id_producto,$cantidad_medida,$unidad_medida,$precio,$estado);
+    $ejecutar->bind_param('iidsdi',$id_cotizacion,$id_producto,$cantidad_medida,$unidad_medida,$precio,$estado);
 
     $ejecutar->execute();
     
@@ -107,51 +107,51 @@ public function GuardarDetalleV($id_venta,$id_producto,$cantidad_medida,$unidad_
 //--------------------------------------------------------------------------------------------------------------------
 //Funcion mostrar los empleados registrados
 
-    public function ObtenerDetalleV(){
+    public function ObtenerDetalleCotizacion(){
 
         $conexion = new conexion();
         $conexion->conectar();
-        $detallevob = array();
+        $detalleCotizacionob = array();
    
-        $sql = "SELECT * FROM detalle_venta";
+        $sql = "SELECT * FROM detalle_cotizacion";
    
         $ejecutar = mysqli_query($conexion->db,$sql);
    
         while($fila = mysqli_fetch_array($ejecutar)){
    
-           $detallevIndex = new DetalleV();
+           $detallecotizacionIndex = new DetalleCotizacion();
    
-           $detallevIndex->setIdetallev($fila[0]);
-           $detallevIndex->setIdventa($fila[1]);
-           $detallevIndex->setIdproducto($fila[2]);
-           $detallevIndex->setCantidadm($fila[3]);
-           $detallevIndex->setUnidadm($fila[4]);
-           $detallevIndex->setPrecio($fila[5]);
-           $detallevIndex->setEstado($fila[6]);
+           $detallecotizacionIndex->setIdetallecotizacion($fila[0]);
+           $detallecotizacionIndex->setIdcotizacion($fila[1]);
+           $detallecotizacionIndex->setIdproducto($fila[2]);
+           $detallecotizacionIndex->setCantidadm($fila[3]);
+           $detallecotizacionIndex->setUnidadm($fila[4]);
+           $detallecotizacionIndex->setPrecio($fila[5]);
+           $detallecotizacionIndex->setEstado($fila[6]);
 
-            array_push($detallevob,$detallevIndex);
+            array_push($detalleCotizacionob,$detallecotizacionIndex);
    
        }
    
        $conexion->desconectar();
        
-       return $detallevob;
+       return $detalleCotizacionob;
 
     }
 
      //-----------------------------------------------------------------------------------------------------------------------------------
     //Funcion Editar Persona
 
-    public function EditarDetalleV($cantidad_medida,$unidad_medida,$precio,$id_detallev){ 
+    public function EditarDetalleCotizacion($cantidad_medida,$unidad_medida,$precio,$id_detallecotizacion){ 
 
         $conexion = new conexion();
         $conexion->conectar();
 
-        $sql = "update detalle_venta set Cantidad_Medida=?, Unidad_Medida=?, Precio=? where id_Detalleventa=?";
+        $sql = "update detalle_cotizacion set Cantidad_Medida=?, Unidad_Medida=?, Precio=? where id_Detallecotizacion=?";
 
         $ejecutar = $conexion->db->prepare($sql);
 
-        $ejecutar->bind_param('dsdi',$cantidad_medida,$unidad_medida,$precio,$id_detallev);
+        $ejecutar->bind_param('dsdi',$cantidad_medida,$unidad_medida,$precio,$id_detallecotizacion);
 
         $ejecutar->execute();
 
@@ -161,20 +161,20 @@ public function GuardarDetalleV($id_venta,$id_producto,$cantidad_medida,$unidad_
 
 
     //------------------------------------------------------------------------------------------------------------------
-    //Funcion para buscar las personas
+    //Funcion para buscar las cotizaciones
 
-    public function BuscarDetalleV($id_detallev){
+    public function BuscarDetalleCotizaciones($id_detallecotizacion){
 
         $conexion = new conexion();
         $conexion->conectar();
 
-        $detallevArray = new DetalleV();
+        $detallecotizacionArray = new DetalleCotizacion();
         
-        $sql = "select * from detalle_venta where id_detalleventa=?";
+        $sql = "select * from detalle_Cotizacion where id_detallecotizacion=?";
 
         $ejecutar = $conexion->db->prepare($sql);
 
-        $ejecutar->bind_param('i',$id_detallev);
+        $ejecutar->bind_param('i',$id_detallecotizacion);
 
         $ejecutar->execute();
 
@@ -182,77 +182,55 @@ public function GuardarDetalleV($id_venta,$id_producto,$cantidad_medida,$unidad_
 
         while($fila = $resultado->fetch_array(MYSQLI_NUM)){
 
-            $detallevArray->setIdetallev($fila[0]);
-            $detallevArray->setIdventa($fila[1]);
-            $detallevArray->setIdproducto($fila[2]);
-            $detallevArray->setCantidadm($fila[3]);
-            $detallevArray->setUnidadm($fila[4]);
-            $detallevArray->setPrecio($fila[5]);
-            $detallevArray->setEstado($fila[6]);
+            $detallecotizacionArray->setIdetallecotizacion($fila[0]);
+            $detallecotizacionArray->setIdcotizacion($fila[1]);
+            $detallecotizacionArray->setIdproducto($fila[2]);
+            $detallecotizacionArray->setCantidadm($fila[3]);
+            $detallecotizacionArray->setUnidadm($fila[4]);
+            $detallecotizacionArray->setPrecio($fila[5]);
+            $detallecotizacionArray->setEstado($fila[6]);
 
         }
 
         $conexion->desconectar();
 
-        return $detallevArray;
+        return $detallecotizacionArray;
     }
 
     //-----------------------------------------------------------------------------------------------------------------------------------
     //Funcion eliminar persona
 
-    public function EliminarDetalleV($id_detallev, $idproducto, $cantidadp) {
+    public function EliminarDetalleCotizacion($id_detallecotizacion) {
         $conexion = new conexion();
         $conexion->conectar();
     
         // Eliminar el detalle de venta
-        $sql = "DELETE FROM detalle_venta WHERE Id_Detalleventa = ?";
+        $sql = "DELETE FROM detalle_cotizacion WHERE Id_Detallecotizacion = ?";
         $ejecutar = $conexion->db->prepare($sql);
-        $ejecutar->bind_param('i', $id_detallev);
+        $ejecutar->bind_param('i', $id_detallecotizacion);
         $ejecutar->execute();
-        $ejecutar->close(); // Cerrar la consulta preparada
-    
-        // Obtener la cantidad actual del producto
-        $sql_cantidad = "SELECT Cantidad FROM producto WHERE Id_Producto = ?";
-        $stmt_cantidad = $conexion->db->prepare($sql_cantidad);
-        $stmt_cantidad->bind_param('i', $idproducto);
-        $stmt_cantidad->execute();
-        $cantidad_actual=0;
-        $stmt_cantidad->bind_result($cantidad_actual);
-        $stmt_cantidad->fetch();
-        $stmt_cantidad->close(); // Cerrar la consulta preparada
-    
-        // Calcular la nueva cantidad
-        $nueva_cantidad = $cantidad_actual + $cantidadp;
-    
-        // Actualizar la cantidad del producto
-        $sql_actualizar = "UPDATE producto SET Cantidad = ? WHERE Id_Producto = ?";
-        $ejecutar_actualizar = $conexion->db->prepare($sql_actualizar);
-        $ejecutar_actualizar->bind_param('ii', $nueva_cantidad, $idproducto);
-        $ejecutar_actualizar->execute();
-        $ejecutar_actualizar->close(); // Cerrar la consulta preparada
-    
-        // Desconectar la base de datos
+
         $conexion->desconectar();
     }
     
     
-    public function ValidarDetalleV($id_venta,$id_producto){   
+    public function ValidarDetalleCotizacion($id_cotizacion,$id_producto){   
 
 
         $conexion = new conexion();
         $conexion->conectar();
         $estado = 0;
 
-        $sql = "select id_venta,id_producto from detalle_venta where id_venta=? and id_producto=?";
+        $sql = "select id_cotizacion,id_producto from detalle_cotizacion where id_cotizacion=? and id_producto=?";
 
         $ejecutar = $conexion->db->prepare($sql);
-        $ejecutar->bind_param('ss', $id_venta,$id_producto);
+        $ejecutar->bind_param('ii', $id_cotizacion,$id_producto);
         $ejecutar->execute();
     
         $resultado = $ejecutar->get_result();
 
         while($fila = $resultado->fetch_array(MYSQLI_NUM)){
-            if(strcmp($fila[0],$id_venta)===0 && strcmp($fila[1],$id_producto)===0){
+            if(strcmp($fila[0],$id_cotizacion)===0 && strcmp($fila[1],$id_producto)===0){
                 $estado=1;
                 break;
             }
@@ -261,11 +239,12 @@ public function GuardarDetalleV($id_venta,$id_producto,$cantidad_medida,$unidad_
         $conexion->desconectar();
         return $estado;
     }
-    public function ObtenerUltimoIdVenta(){
+
+    public function ObtenerUltimoIdCotizacion(){
         $conexion = new conexion();
         $conexion->conectar();
     
-        $sql = "SELECT MAX(id_venta) FROM venta";
+        $sql = "SELECT MAX(id_cotizacion) FROM cotizacion";
         $result = mysqli_query($conexion->db, $sql);
     
         if ($result) {
@@ -280,15 +259,16 @@ public function GuardarDetalleV($id_venta,$id_producto,$cantidad_medida,$unidad_
         return $ultimoId;
     }
     
-    public function CalcularTotalVenta($id_venta){
+
+    public function CalcularTotalCotizacion($id_cotizacion){
         $conexion = new conexion();
         $conexion->conectar();
         $estado=1;
         $total = 0;
-        $sql = "SELECT SUM(Precio) AS total FROM detalle_venta WHERE Id_Venta = ? AND Estado=?";
+        $sql = "SELECT SUM(Precio) AS total FROM detalle_cotizacion WHERE Id_Cotizacion = ? AND Estado=?";
         
         $ejecutar = $conexion->db->prepare($sql);
-        $ejecutar->bind_param('ii',$id_venta,$estado);
+        $ejecutar->bind_param('ii',$id_cotizacion,$estado);
         $ejecutar->execute();
         
         $resultado = $ejecutar->get_result();
@@ -306,7 +286,7 @@ public function GuardarDetalleV($id_venta,$id_producto,$cantidad_medida,$unidad_
 
 
 
-class Producto1{
+class Producto2{
 
     public $cantidad_producto;
     public $descripcion_producto;
@@ -405,7 +385,7 @@ class Producto1{
        
             while($fila = mysqli_fetch_array($ejecutar)){
        
-               $productoIndex = new Producto1();
+               $productoIndex = new Producto2();
        
                    $productoIndex->setIdproducto($fila[0]);
                    //$productoIndex->setIdetalle($fila[1]);
@@ -433,12 +413,12 @@ class Producto1{
         //------------------------------------------------------------------------------------------------------------------
     //Funcion para buscar las personas
 
-    public function BuscarProducto1($idproducto){
+    public function BuscarProducto2($idproducto){
 
         $conexion = new conexion();
         $conexion->conectar();
 
-        $productoArray = new Producto1();
+        $productoArray = new Producto2();
         $sql = "select * from producto where id_producto=?";
 
         $ejecutar = $conexion->db->prepare($sql);
@@ -462,114 +442,114 @@ class Producto1{
         return $productoArray;
 
     }
-           
-       
+    
+     
+}    
+class Usuario{
+    public $clave;
+    public $estado;
+    public $idrol;
+    public $idusuario;
+    public $nombre;
+
+    //creacion de los metodos get y set
+
+    //----------------------------------------------------------------------------------
+
+    //metodo get y set clave
+
+    public function getClave(){
+        return $this->clave;
     }
+
+    public function setClave($_clave1){
+        $this->clave = $_clave1;
+    }
+
+
+    //----------------------------------------------------------------------------------
     
-    class Usuario{
-        public $clave;
-        public $estado;
-        public $idrol;
-        public $idusuario;
-        public $nombre;
+    //metodo get y set estado
+
+    public function getEstado(){
+        return $this->estado;
+    }
+
+    public function setEstado($_estado1){
+        $this->estado = $_estado1;
+    }
+
+
+    //---------------------------------------------------------------------------
+
+    //metodo get y set id rol
+
+    public function getIdrol(){
+       return $this->idrol;
+    }
+
+    public function setIdrol($_idrol1){
+        $this->idrol = $_idrol1;
+    }
+
+    //-----------------------------------------------------------------------------
+
+    //metodo get y set id usuario
+
+    public function getIdusuario(){
+
+        return $this->idusuario;
+    }
+
+    public function setIdusuario($_idusuario1){
+        $this->idusuario = $_idusuario1;
     
-        //creacion de los metodos get y set
-    
-        //----------------------------------------------------------------------------------
-    
-        //metodo get y set clave
-    
-        public function getClave(){
-            return $this->clave;
-        }
-    
-        public function setClave($_clave1){
-            $this->clave = $_clave1;
-        }
-    
-    
-        //----------------------------------------------------------------------------------
-        
-        //metodo get y set estado
-    
-        public function getEstado(){
-            return $this->estado;
-        }
-    
-        public function setEstado($_estado1){
-            $this->estado = $_estado1;
-        }
-    
-    
-        //---------------------------------------------------------------------------
-    
-        //metodo get y set id rol
-    
-        public function getIdrol(){
-           return $this->idrol;
-        }
-    
-        public function setIdrol($_idrol1){
-            $this->idrol = $_idrol1;
-        }
-    
-        //-----------------------------------------------------------------------------
-    
-        //metodo get y set id usuario
-    
-        public function getIdusuario(){
-    
-            return $this->idusuario;
-        }
-    
-        public function setIdusuario($_idusuario1){
-            $this->idusuario = $_idusuario1;
-        
-        }
-    
-        //------------------------------------------------------------------------------------
-         
-    
-        //metodo get y set nombre 
-    
-        public function getNombre(){
-            return $this-> nombre;
-    
-        }
-    
-        public function setNombre($_nombre1){
-            $this->nombre = $_nombre1;
-        }
-    
-   
+    }
+
+    //------------------------------------------------------------------------------------
+     
+
+    //metodo get y set nombre 
+
+    public function getNombre(){
+        return $this-> nombre;
+
+    }
+
+    public function setNombre($_nombre1){
+        $this->nombre = $_nombre1;
+    }
+
+
 //funcion visualizar Usuarios
 public function ObtenerUsuarios(){
-        
-    $conexion = new conexion();
-    $conexion->conectar();
-
-    $resultadoUsuarios = array();
-
-    $sql = "SELECT u.Id_Usuario, r.Nombre, u.Nombre, u.Clave, u.Estado FROM usuario u JOIN rol r on u.Id_Rol=r.Id_Rol";
-    $ejecutar = mysqli_query($conexion->db,$sql);
-
-    while($fila = mysqli_fetch_array($ejecutar)){
-
-        $usuarioIndex = new Usuario();
-
-        $usuarioIndex->setIdusuario($fila[0]);
-        $usuarioIndex->setIdrol($fila[1]);
-        $usuarioIndex->setNombre($fila[2]);
-        $usuarioIndex->setClave($fila[3]);
-        $usuarioIndex->setEstado($fila[4]);
-
-        array_push($resultadoUsuarios,$usuarioIndex);
-
-    }
-
-    $conexion->desconectar();
     
-    return $resultadoUsuarios;
-    }    
+$conexion = new conexion();
+$conexion->conectar();
+
+$resultadoUsuarios = array();
+
+$sql = "SELECT u.Id_Usuario, r.Nombre, u.Nombre, u.Clave, u.Estado FROM usuario u JOIN rol r on u.Id_Rol=r.Id_Rol";
+$ejecutar = mysqli_query($conexion->db,$sql);
+
+while($fila = mysqli_fetch_array($ejecutar)){
+
+    $usuarioIndex = new Usuario();
+
+    $usuarioIndex->setIdusuario($fila[0]);
+    $usuarioIndex->setIdrol($fila[1]);
+    $usuarioIndex->setNombre($fila[2]);
+    $usuarioIndex->setClave($fila[3]);
+    $usuarioIndex->setEstado($fila[4]);
+
+    array_push($resultadoUsuarios,$usuarioIndex);
+
+}
+
+$conexion->desconectar();
+
+return $resultadoUsuarios;
 }    
+}    
+
 ?>
