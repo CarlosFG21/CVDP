@@ -34,6 +34,7 @@
                         <div class="card-header">
                             <a type="submit" class="btn btn-success" href="compra_ingresar.php"> 
                             <i class="nav-icon fas fa-plus"> Registrar Compra </i></a>
+                            <a type="submit" class="btn btn-danger" target="_blank" href="../reportes/reporte_compra.php"> <i class="nav-icon fas fa-file"> Generar Reporte</i></a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

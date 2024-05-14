@@ -38,6 +38,7 @@ include("layout/nav.php");
             <div class="card">
               <div class="card-header">
               <a type="submit" class="btn btn-success" href="venta_ingresar.php"> <i class="nav-icon fas fa-plus"> Ingresar nueva Venta</i></a>
+              <a type="submit" class="btn btn-danger" target="_blank" href="../reportes/reporte_venta.php"> <i class="nav-icon fas fa-file"> Generar Reporte</i></a>
               <?php 
               include("../clases/DetalleV.php");
               $VentaID = new DetalleV();

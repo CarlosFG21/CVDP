@@ -104,7 +104,7 @@
                           $commonMenuItems = array(
                               array('href' => 'index.php', 'icon' => 'fa fa-home', 'text' => 'Inicio'),
                               array('href' => 'venta.php', 'icon' => 'fas fa-id-card', 'text' => 'Venta'),
-                              array('href' => 'cotizacion.php', 'icon' => 'fas fa-briefcase', 'text' => 'cotizacion')
+                              array('href' => 'cotizacion.php', 'icon' => 'fas fa-briefcase', 'text' => 'Cotizacion')
                           );
 
                           //matriz de elementos de menú para administradores
