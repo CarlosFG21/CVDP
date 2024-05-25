@@ -189,17 +189,22 @@ include("../clases/DetalleV.php");
                                                    <div class="form-group">
                                                        <label for="">Unidad Medida:</label>
                                                        <select type="text"class="form-control" name="unidad_medida" id="unidad_medida">
-                                                            <option>Unidad</option>
+                                                            <option>-----</option>
                                                             <option>Metro (m)</option>
                                                             <option>Centimetro (cm)</option>
                                                             <option>Milimetro (mm)</option>
                                                             <option>Yarda</option>
+                                                            <option>Pulgada</option>
                                                             <option>Kilogramo (kg)</option>
                                                             <option>Gramo (g)</option>
                                                             <option>Onza</option>
                                                             <option>Libra</option>
                                                             <option>Quital</option>
                                                             <option>Arroba</option>
+                                                            <option>Saco</option>
+                                                            <option>Galon</option>
+                                                            <option>Caja</option>
+                                                            <option>Bolsa</option>
                                                         </select>
                                                    </div>
                                                </div>
@@ -220,24 +225,25 @@ include("../clases/DetalleV.php");
                                                    <div class="form-group">
                                                        <label for="">Precio:</label>
                                                        <input type="number"  id="precio_producto" class="form-control" disabled>
-                                                       <input type="number" name="precio_producto2" id="precio_producto2" class="form-control" hidden>
+                                                       <input type="number" step="any" name="precio_producto2" id="precio_producto2" class="form-control" hidden>
                                                    </div>
                                                </div>
-                                               <script>
-                                                     document.addEventListener("DOMContentLoaded", function() {
+                                               
+                                                <script>
+                                                    document.addEventListener("DOMContentLoaded", function() {
                                                     var cantidadInput = document.getElementById('cantidad_v');
                                                     var cantidadDisponibleInput = document.getElementById('cantidad_producto');
 
                                                     cantidadInput.addEventListener('input', function() {
-                                                    var cantidad = parseInt(cantidadInput.value);
-                                                    var cantidadDisponible = parseInt(cantidadDisponibleInput.value);
+                                                    var cantidad = parseFloat(cantidadInput.value); // Utilizar parseFloat en lugar de parseInt
+                                                    var cantidadDisponible = parseFloat(cantidadDisponibleInput.value); // Utilizar parseFloat en lugar de parseInt
 
                                                     if (cantidad > cantidadDisponible) {
-                                                    alert('La cantidad ingresada es mayor que la cantidad disponible');
-                                                    cantidadInput.value = cantidadDisponible; // Restablecer la cantidad al máximo disponible
-                                                }
-                                                });
-                                                });
+                                                        alert('La cantidad ingresada es mayor que la cantidad disponible');
+                                                        cantidadInput.value = cantidadDisponible; // Restablecer la cantidad al máximo disponible
+                                                        }
+                                                    });
+                                                    });
                                                 </script>
                                             
                                                
@@ -337,6 +343,7 @@ include("../clases/DetalleV.php");
                                             $fecha = $ventaArray->getFecha();
                                             $num_comprobante = $ventaArray->getComprobante();
                                             $serie = $ventaArray->getSerie();
+                                            $id_cliente = $ventaArray->getIdcliente();
                                             
                                             
                                         ?>
@@ -345,7 +352,8 @@ include("../clases/DetalleV.php");
                                                <label for="">Número de la venta</label>
                                                <?php echo "
                                                <input type='text' style='text-align: center' value='$id_venta'class='form-control' disabled>
-                                               <input type='text'  value='$id_venta' name='id_venta' id='id_venta' hidden>";?>
+                                               <input type='text'  value='$id_venta' name='id_venta' id='id_venta' hidden>
+                                               <input type='text'  value='$id_cliente' name='id_cliente' id='id_cliente' hidden>";?>
                                            </div>
                                        </div>
 
@@ -398,7 +406,7 @@ include("../clases/DetalleV.php");
                                        <div class="col-md-12">
                                            <div class="form-group">
                                                <label for="">Descuento</label>
-                                               <input type="number" style="text-align: center" min=0 oninput="validity.valid||(value='');" class="form-control" name="descuento" id="descuento">
+                                               <input type="number"  step="any" style="text-align: center" min=0 oninput="validity.valid||(value='');" class="form-control" name="descuento" id="descuento">
                                            </div>
                                        </div>
                                        <script>

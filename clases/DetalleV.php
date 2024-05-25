@@ -570,6 +570,37 @@ public function ObtenerUsuarios(){
     $conexion->desconectar();
     
     return $resultadoUsuarios;
-    }    
+    } 
+//funcion Buscar Usuario
+
+public function BuscarUsuario($idusuario) {
+        $conexion = new conexion();
+        $conexion->conectar();
+    
+        $usuarioArray = array(); // Inicializa un array vacío
+    
+        $sql = "SELECT * FROM usuario WHERE id_usuario=?";
+        $ejecutar = $conexion->db->prepare($sql);
+        $ejecutar->bind_param('i', $idusuario);
+        $ejecutar->execute();
+    
+        // Obtiene el resultado de la consulta preparada
+        $resultado = $ejecutar->get_result();
+    
+        // Recorre los resultados y crea objetos Usuario
+        while ($fila = $resultado->fetch_array(MYSQLI_NUM)) {
+            $usuario = new Usuario(); // Crea un nuevo objeto Usuario
+            $usuario->setIdusuario($fila[0]);
+            $usuario->setIdrol($fila[1]);
+            $usuario->setNombre($fila[2]);
+            $usuario->setClave($fila[3]);
+            $usuario->setEstado($fila[4]);
+            $usuarioArray[] = $usuario; // Agrega el objeto Usuario al array
+        }
+    
+        $conexion->desconectar();
+    
+        return $usuarioArray;
+    }   
 }    
 ?>
