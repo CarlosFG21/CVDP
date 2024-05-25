@@ -103,20 +103,22 @@
                           //matriz de elementos de menú comunes para todos los usuarios
                           $commonMenuItems = array(
                               array('href' => 'index.php', 'icon' => 'fa fa-home', 'text' => 'Inicio'),
-                              array('href' => 'venta.php', 'icon' => 'fas fa-id-card', 'text' => 'Venta'),
-                              array('href' => 'cotizacion.php', 'icon' => 'fas fa-briefcase', 'text' => 'Cotizacion')
+                              array('href' => 'venta.php', 'icon' => 'fas fa-cart-plus', 'text' => 'Venta'),
+                              array('href' => 'cotizacion.php', 'icon' => 'fas fa-briefcase', 'text' => 'Cotizacion'),
+                              array('href' => 'cuenta_por_cobrar.php', 'icon' => 'fas fa-credit-card', 'text' => 'Créditos'),
+                              array('href' => 'pagos_creditos.php', 'icon' => 'fas fa-archive', 'text' => 'Pago Créditos')
                           );
 
                           //matriz de elementos de menú para administradores
                           $adminMenuItems = array(
                               array('href' => 'categoria_producto.php', 'icon' => 'fas fa-braille', 'text' => 'Categoria Productos'),
+                              array('href' => 'producto.php', 'icon' => 'fas fa-table', 'text' => 'Producto'),
                               array('href' => 'persona.php', 'icon' => 'fas fa-male', 'text' => 'Clientes / Proveedores'),
                               array('href' => 'rol.php', 'icon' => 'fas fa-clone', 'text' => 'Roles'),
                               array('href' => 'usuario.php', 'icon' => 'fas fa-user', 'text' => 'Usuarios'),
                               array('href' => 'empleado.php', 'icon' => 'fas fa-child', 'text' => 'Empleado'),
                               array('href' => 'gasto.php', 'icon' => 'fas fa-university', 'text' => 'Gastos'),
                               array('href' => 'planilla.php', 'icon' => 'fas fa-file', 'text' => 'Planilla'),
-                              array('href' => 'producto.php', 'icon' => 'fas fa-table', 'text' => 'Producto'),
                               array('href' => 'compra.php', 'icon' => 'fa fa-shopping-bag', 'text' => 'Compras')
                               
                           );

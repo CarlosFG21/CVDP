@@ -62,7 +62,7 @@ include("layout/nav.php");
                     <th>No. Serie</th>
                     <th>Fecha de Venta</th>
                     <th>Total</th>
-                    <th>Metodo de Pago</th>
+                    <th>Estado del Pago</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                     
@@ -100,7 +100,7 @@ include("layout/nav.php");
                          <td>Q. $total</td>
                     ";
                     if($pago==1){
-                      echo "<td><h4><span class='badge bg-info'>Efectivo</span></h4></td>";
+                      echo "<td><h4><span class='badge bg-info'>Pagado</span></h4></td>";
                      }else{
                       echo "<td><h4><span class='badge bg-warning'>Crédito</span></h4></td>";
                      }
