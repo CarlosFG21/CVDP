@@ -15,7 +15,7 @@
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
-            <h2 class="active"> Iniciar Session </h2>
+            <h2 class="active"> Iniciar Sesión </h2>
 
             <!-- Icon -->
             <div class="fadeIn first">
