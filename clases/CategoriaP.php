@@ -205,7 +205,7 @@ class Categoriap{
     //----------------------------------------------------------------------------------------------
     // Funcion validar categoria de producto
 
-    public function ValidarCategoriap($categoriapv){   
+    public function ValidarCategoriap($categoriapv,$descripcionp){   
 
 
         $conexion = new conexion();
@@ -214,16 +214,16 @@ class Categoriap{
 
         $estado = 0;
 
-        $sql = "select nombre from categoria_producto where nombre=?";
+        $sql = "select nombre from categoria_producto where nombre=? and descripcion=?";
 
         $ejecutar = $conexion->db->prepare($sql);
-        $ejecutar->bind_param('s', $categoriapv);
+        $ejecutar->bind_param('ss', $categoriapv,$descripcionp);
         $ejecutar->execute();
     
         $resultado = $ejecutar->get_result();
 
         while($fila = $resultado->fetch_array(MYSQLI_NUM)){
-            if(strcmp($fila[0],$categoriapv)===0){
+            if(strcmp($fila[0],$categoriapv)===0 && strcmp($fila[1],$descripcionp)===0){
                 $estado=1;
                 break;
             }

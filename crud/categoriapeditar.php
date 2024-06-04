@@ -10,7 +10,7 @@ if(isset($_POST["btnEditarCategotiap"])){
   $nombre = $_POST['categoriap'];
   $descripcion = $_POST['descripcion'];
 
-  if($categoria->ValidarCategoriap($nombre)==0){
+  if($categoria->ValidarCategoriap($nombre,$descripcion)==0){
 
   $categoria->EditarCategotia($nombre,$descripcion,$id);
 
