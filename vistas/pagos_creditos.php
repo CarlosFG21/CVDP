@@ -22,7 +22,7 @@ include("layout/nav.php");
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-             
+            
             </ol>
           </div>
         </div>
@@ -39,6 +39,14 @@ include("layout/nav.php");
               <div class="card-header">
               <?php 
               include("../clases/DetalleCuentaC.php");
+              $pagocredID = new CuentaC();
+              $id = $pagocredID->ObtenerUltimoIdPagoCredito();
+              if($id >= 1){
+                echo "<a type='submit' class='btn btn-warning' href='../reportes/Ultimo_pagocredito.php'> <i class='nav-icon fas fa-plus'> Ultimo Pago Realizado</i></a>";
+              }
+              ?>
+              <?php 
+              
               
               ?>
               

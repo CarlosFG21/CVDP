@@ -11,7 +11,7 @@ class DetalleCuentaC{
     public $cantidad_abonar;
     public $saldo_pendiente;
     public $estado;
-     
+    
     //--------------------------- creacion del metod get y set -----------------------------------
 
     public function getIdDetallecuentac(){
@@ -186,7 +186,6 @@ public function ObtenerDetalleCuentaC(){
 
         return $estado;
     }
-
 
 }
 

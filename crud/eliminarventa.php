@@ -1,10 +1,10 @@
 <?php
-    include("../clases/Venta.php");
+    include("../clases/Detallev.php");
 
-    $venta = new Venta();
+    $venta = new DetalleV();
     $id = $_REQUEST['id'];
 
-    $venta->EliminarVenta($id);
+    $venta->EliminarVenta1($id);
     header("Location: ../vistas/venta.php");
 
 ?>

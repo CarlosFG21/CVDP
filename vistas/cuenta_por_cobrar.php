@@ -89,11 +89,13 @@ include("layout/nav.php");
                      echo "<td><h4><span class='badge bg-success'>Cancelada</span></h4></td>";
                     }
                     
-                    echo "<td>
-                    <a type='submit' href='../vistas/pago_abono.php?id=$idcobrar' class='btn bg-gradient-primary' title='pago o abono'>
+                    echo "<td>";
+                    if($estado==1){
+                    echo "<a type='submit' href='../vistas/pago_abono.php?id=$idcobrar' class='btn bg-gradient-primary' title='pago o abono'>
                     <i class='fas fa-credit-card'> Pago/Abono</i> 
-                    </a>
-                    <a type='submit' href='../ticket/Vista.php?id=$idventa' class='btn bg-gradient-primary' title='Visualizar Venta'>
+                    </a>";
+                    }
+                    echo "<a type='submit' href='../ticket/Vista.php?id=$idventa' class='btn bg-gradient-primary' title='Visualizar Venta'>
                     <i class='fas fa-eye'></i> 
                     </a>&nbsp;&nbsp;";
 

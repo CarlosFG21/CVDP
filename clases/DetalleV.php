@@ -238,7 +238,6 @@ public function GuardarDetalleV($id_venta,$id_producto,$cantidad_medida,$unidad_
     
     public function ValidarDetalleV($id_venta,$id_producto){   
 
-
         $conexion = new conexion();
         $conexion->conectar();
         $estado = 0;
@@ -300,6 +299,104 @@ public function GuardarDetalleV($id_venta,$id_producto,$cantidad_medida,$unidad_
         $conexion->desconectar();
         
         return $total;
+    }
+
+
+    //-----------------------------------------------------------------------------------------------------------------------------------
+    //Funcion eliminar empleado o desactivarlo
+
+    public function EliminarVenta1($id_venta){
+        $conexion = new conexion();
+        $conexion->conectar();
+
+        $estado_venta = 0;
+        $sql_update_venta = "UPDATE venta SET estado=? WHERE id_venta=?";
+        $stmt_venta = $conexion->db->prepare($sql_update_venta);
+        $stmt_venta->bind_param('ii', $estado_venta, $id_venta);
+        $stmt_venta->execute();
+    
+        // Actualizar detalles de venta relacionados
+        $estado_detalle = 0;
+        $sql_update_detalle = "UPDATE detalle_venta SET estado=? WHERE id_venta=?";
+        $stmt_detalle = $conexion->db->prepare($sql_update_detalle);
+        $stmt_detalle->bind_param('ii', $estado_detalle, $id_venta);
+        $stmt_detalle->execute();
+
+        // Actualizar credito de venta relacionados
+        $estado_credito = 0;
+        $sql_update_credito = "UPDATE cuentaspor_cobrar SET estado=? WHERE id_venta=?";
+        $stmt_credito = $conexion->db->prepare($sql_update_credito);
+        $stmt_credito->bind_param('ii', $estado_credito, $id_venta);
+        $stmt_credito->execute();
+    
+        // Sumar la cantidad de productos vendidos nuevamente a la tabla de productos
+        $sql_select_detalle = "SELECT Id_Producto, Cantidad_Medida FROM detalle_venta WHERE Id_Venta=?";
+        $stmt_select_detalle = $conexion->db->prepare($sql_select_detalle);
+        $stmt_select_detalle->bind_param('i', $id_venta);
+        $stmt_select_detalle->execute();
+        $result_detalle = $stmt_select_detalle->get_result();
+    
+        while ($row_detalle = $result_detalle->fetch_assoc()) {
+            $id_producto = $row_detalle['Id_Producto'];
+            $cantidad_medida = $row_detalle['Cantidad_Medida'];
+    
+            // Actualizar la cantidad del producto en la tabla de productos
+            $sql_update_producto = "UPDATE producto SET Cantidad = Cantidad + ? WHERE Id_Producto=?";
+            $stmt_producto = $conexion->db->prepare($sql_update_producto);
+            $stmt_producto->bind_param('di', $cantidad_medida, $id_producto);
+            $stmt_producto->execute();
+        }
+
+        $conexion->desconectar();
+
+
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------
+    //Funcion reactivar a empleado
+
+    public function  ReactivarVenta1($id_venta){
+        $conexion = new conexion();
+        $conexion->conectar();
+        
+        $estado_venta = 1;
+        $sql_update_venta = "UPDATE venta SET estado=? WHERE id_venta=?";
+        $stmt_venta = $conexion->db->prepare($sql_update_venta);
+        $stmt_venta->bind_param('ii', $estado_venta, $id_venta);
+        $stmt_venta->execute();
+    
+        // Actualizar detalles de venta relacionados
+        $estado_detalle = 1;
+        $sql_update_detalle = "UPDATE detalle_venta SET estado=? WHERE id_venta=?";
+        $stmt_detalle = $conexion->db->prepare($sql_update_detalle);
+        $stmt_detalle->bind_param('ii', $estado_detalle, $id_venta);
+        $stmt_detalle->execute();
+
+        // Actualizar credito de venta relacionados
+        $estado_credito = 1;
+        $sql_update_credito = "UPDATE cuentaspor_cobrar SET estado=? WHERE id_venta=?";
+        $stmt_credito = $conexion->db->prepare($sql_update_credito);
+        $stmt_credito->bind_param('ii', $estado_credito, $id_venta);
+        $stmt_credito->execute();
+    
+        // Restar la cantidad de productos vendidos de la tabla de productos
+        $sql_select_detalle = "SELECT Id_Producto, Cantidad_Medida FROM detalle_venta WHERE Id_Venta=?";
+        $stmt_select_detalle = $conexion->db->prepare($sql_select_detalle);
+        $stmt_select_detalle->bind_param('i', $id_venta);
+        $stmt_select_detalle->execute();
+        $result_detalle = $stmt_select_detalle->get_result();
+    
+        while ($row_detalle = $result_detalle->fetch_assoc()) {
+            $id_producto = $row_detalle['Id_Producto'];
+            $cantidad_medida = $row_detalle['Cantidad_Medida'];
+    
+            // Actualizar la cantidad del producto en la tabla de productos
+            $sql_update_producto = "UPDATE producto SET Cantidad = Cantidad - ? WHERE Id_Producto=?";
+            $stmt_producto = $conexion->db->prepare($sql_update_producto);
+            $stmt_producto->bind_param('di', $cantidad_medida, $id_producto);
+            $stmt_producto->execute();
+        }
+
     }
 
 }
@@ -462,6 +559,31 @@ class Producto1{
         return $productoArray;
 
     }
+//funcion editar Producto 
+public function EditarProductoCantidad($cantidad_venta, $Id){
+
+    $conexion = new conexion();
+    $conexion->conectar();
+  // Obtener la cantidad existente del producto
+  $sql_select = "SELECT Cantidad FROM producto WHERE Id_Producto=?";
+  $stmt_select = $conexion->db->prepare($sql_select);
+  $stmt_select->bind_param('i', $Id);
+  $stmt_select->execute();
+  $resultado = $stmt_select->get_result();
+  $fila = $resultado->fetch_assoc();
+  $cantidad_existente = $fila['Cantidad'];
+  
+  // Restar la cantidad de venta de la cantidad existente
+  $nueva_cantidad = $cantidad_existente - $cantidad_venta;
+
+  // Actualizar la cantidad en la base de datos
+  $sql_update = "UPDATE producto SET Cantidad=? WHERE Id_Producto=?";
+  $stmt_update = $conexion->db->prepare($sql_update);
+  $stmt_update->bind_param('di', $nueva_cantidad, $Id);
+  $stmt_update->execute();
+
+  $conexion->desconectar();
+  }
            
        
     }
