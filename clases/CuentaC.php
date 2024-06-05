@@ -270,5 +270,23 @@ public function ValidarCuentaC($id_cobrar){
         return $CuentaArray;
 
     }
+    public function ObtenerUltimoIdPagoCredito(){
+        $conexion = new conexion();
+        $conexion->conectar();
+    
+        $sql = "SELECT MAX(id_cobrar) FROM cuentaspor_cobrar";
+        $result = mysqli_query($conexion->db, $sql);
+    
+        if ($result) {
+            $row = mysqli_fetch_array($result);
+            $ultimoId = $row[0];
+        } else {
+            $ultimoId = null;
+        }
+    
+        $conexion->desconectar();
+        
+        return $ultimoId;
+    }
 }
 ?>
