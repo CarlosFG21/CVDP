@@ -10,7 +10,7 @@ $categoria = new Categoriap();
 if(isset($_POST["btnGuardarCategoria"])){
 
 
-    if($categoria ->ValidarCategoriap($nombre)==0){
+    if($categoria->ValidarCategoriap($nombre,$descripcion)==0){
 
 
     $categoria->GuardarCategoriaP($nombre,$descripcion);

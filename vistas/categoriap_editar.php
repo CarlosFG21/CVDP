@@ -77,7 +77,7 @@ include("layout/nav.php");
                         <label>Tipo de categoria(Producto)</label>
                         <?php
                          echo "
-                        <input type='text' class='form-control' placeholder='Rol' value='$nombre' name='categoriap' id='categoriap'
+                        <input type='text' class='form-control' placeholder='Categoria' value='$nombre' name='categoriap' id='categoriap'
                         pattern='^[a-zA-Záéíóú]{1,30}' required minlength='3' maxlength='15'>";
                         ?>
                       </div>

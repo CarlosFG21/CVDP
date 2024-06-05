@@ -214,7 +214,7 @@ class Categoriap{
 
         $estado = 0;
 
-        $sql = "select nombre from categoria_producto where nombre=? and descripcion=?";
+        $sql = "select nombre,descripcion from categoria_producto where nombre=? and descripcion=?";
 
         $ejecutar = $conexion->db->prepare($sql);
         $ejecutar->bind_param('ss', $categoriapv,$descripcionp);
