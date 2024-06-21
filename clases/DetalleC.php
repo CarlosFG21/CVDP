@@ -1,11 +1,8 @@
 <?php
 
-//include("../db/conexion.php");
-
 class DetalleC{
 
 public $cantidad;
-public $cantidad_medida;
 public $estado;
 public $id_compra;
 public $id_detallecompra;
@@ -18,14 +15,6 @@ public function getCantidad(){
 }
 public function setCantidad($_cantidad){
     $this->cantidad = $_cantidad;
-}
-
-
-public function getCantidadM(){
-    return $this->cantidad_medida;
-}
-public function setCantidadM($_cantidadm){
-    $this->cantidad_medida = $_cantidadm;
 }
 
 
@@ -76,12 +65,13 @@ public function setPrecio($_precio){
     $this->precio = $_precio;
 }
 
+
 //funcion guardar
-public function GuardarDetalleCompra($conexion, $idcompra, $idproducto, $cantidad, $unidadmedida, $cantidadmedida, $precio){
-    $sql = "INSERT INTO detalle_compra (Id_Compra, Id_Producto, Cantidad, Unidad_Medida, Cantidad_Medida, Precio) VALUES (?, ?, ?, ?, ?, ?)";
+public function GuardarDetalleCompra($conexion, $idcompra, $idproducto, $cantidad, $unidadmedida, $precio){
+    $sql = "INSERT INTO detalle_compra (Id_Compra, Id_Producto, Cantidad, Unidad_Medida, Precio) VALUES (?, ?, ?, ?, ?)";
     $ejecutar = $conexion->db->prepare($sql);
     if ($ejecutar) {
-        $ejecutar->bind_param('iiisss', $idcompra, $idproducto, $cantidad, $unidadmedida, $cantidadmedida, $precio);
+        $ejecutar->bind_param('iiiss', $idcompra, $idproducto, $cantidad, $unidadmedida, $precio);
         $ejecutar->execute();
     } else {
         die('Error al preparar la consulta: ' . $conexion->db->error);
@@ -105,7 +95,6 @@ public function ObtenerDetallesCompras($conexion){
         $detalleC->setIdproducto($fila[2]);
         $detalleC->setCantidad($fila[3]);
         $detalleC->setUnidadm($fila[4]);
-        $detalleC->setCantidadM($fila[5]);
         $detalleC->setPrecio($fila[6]);
         $detalleC->setEstado($fila[7]);
 
@@ -123,9 +112,9 @@ public function EditarDetalleCompra($conexion, $idcompra, $idproducto, $cantidad
     /*$conexion = new conexion();
     $conexion->conectar();*/
 
-    $sql = "update detalle_compra set Id_Compra=?, Id_Producto=?, Cantidad=?, Unidad_Medida=?, Cantida_Medida=? where Id_Detallecompra=?";
+    $sql = "update detalle_compra set Id_Compra=?, Id_Producto=?, Cantidad=?, Unidad_Medida=? where Id_Detallecompra=?";
     $ejecutar = $conexion->db->prepare($sql);
-    $ejecutar->bind_param('iiiss',$idcompra, $idproducto, $cantidad, $unidadmedida, $cantidadmedida);
+    $ejecutar->bind_param('iiis',$idcompra, $idproducto, $cantidad, $unidadmedida);
     $ejecutar->execute();
 
     $conexion->desconectar();
@@ -137,7 +126,7 @@ public function BuscarDetalleCompra($conexion, $id_DetalleC) {
     
     $detalleCArray = array(); // Inicializa un array vacío
 
-    $sql = "SELECT dc.Id_Detallecompra, dc.Id_Compra, p.Nombre, dc.Cantidad, dc.Unidad_Medida, dc.Cantidad_Medida, dc.Precio, dc.Estado FROM detalle_compra dc JOIN producto p ON dc.Id_Producto=p.Id_Producto WHERE Id_Compra=?";
+    $sql = "SELECT dc.Id_Detallecompra, dc.Id_Compra, p.Nombre, dc.Cantidad, dc.Unidad_Medida, dc.Precio, dc.Estado FROM detalle_compra dc JOIN producto p ON dc.Id_Producto=p.Id_Producto WHERE Id_Compra=?";
     $ejecutar = $conexion->db->prepare($sql);
     $ejecutar->bind_param('i', $id_DetalleC);
     $ejecutar->execute();
@@ -153,9 +142,8 @@ public function BuscarDetalleCompra($conexion, $id_DetalleC) {
         $detalleC->setIdproducto($fila[2]);
         $detalleC->setCantidad($fila[3]);
         $detalleC->setUnidadm($fila[4]);
-        $detalleC->setCantidadM($fila[5]);
-        $detalleC->setPrecio($fila[6]);
-        $detalleC->setEstado($fila[7]);
+        $detalleC->setPrecio($fila[5]);
+        $detalleC->setEstado($fila[6]);
         $detalleCArray[] = $detalleC; // Agrega el objeto Usuario al array
     }
 
@@ -166,9 +154,6 @@ public function BuscarDetalleCompra($conexion, $id_DetalleC) {
 
 //Funcion Eliminar Compra
 public function EliminarDetalleCompra($conexion, $id_DetalleC){
-
-    /*$conexion = new conexion();
-    $conexion->conectar();*/
 
     $estado = 0;
 
@@ -184,9 +169,6 @@ public function EliminarDetalleCompra($conexion, $id_DetalleC){
 //no creo sea ideal reactivar una compra, lo mejor es eliminarla o crear una nueva
 //funcion Reactivar Compra
 public function ReactivarDetalleCompra($conexion, $id_DetalleC) {
-
-    /*$conexion = new conexion();
-    $conexion->conectar();*/
 
     $estado = 1;
 

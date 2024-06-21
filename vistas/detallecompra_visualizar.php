@@ -130,7 +130,6 @@
                                       <th>Producto</th>
                                       <th>Cantidad</th>
                                       <th>Unidad Medida</th>
-                                      <th>Cantidad Medida</th>
                                       <th>Precio</th>
                                       <th>Estado</th>
                                     </tr>
@@ -144,7 +143,6 @@
                                       $producto = $detalleArray[$i]->getIdproducto();
                                       $cantidad = $detalleArray[$i]->getCantidad();
                                       $umedida = $detalleArray[$i]->getUnidadm();
-                                      $cmedida = $detalleArray[$i]->getCantidadM();
                                       $precio = $detalleArray[$i]->getPrecio();
                                       $estado = $detalleArray[$i]->getEstado();
                                       
@@ -152,7 +150,6 @@
                                         <td>$producto</td>
                                         <td>$cantidad</td>
                                         <td>$umedida</td>
-                                        <td>$cmedida</td>
                                         <td>$precio</td>";
 
                                         if($estado==1){
@@ -166,7 +163,7 @@
                                 </tbody>
                                 <tfoot>
                                   <tr>
-                                    <td colspan="4" align="right">Total:</td>
+                                    <td colspan="3" align="right">Total:</td>
                                     <td id="total"><?php echo $total; ?></td>
                                     <td></td>
                                   </tr>
@@ -194,8 +191,5 @@
 
 
 <?php
-
-include("layout/footer.php");
-
-
+  include("layout/footer.php");
 ?>

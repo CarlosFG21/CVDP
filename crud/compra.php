@@ -30,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $idproducto = $_POST['Idproducto'];
         $cantidad = $_POST['Cantidad'];
         $unidadmedida = $_POST['Unidadmedida'];
-        $cantidadmedida = $_POST['Cantidadmedida'];
         $precio = $_POST['Precio'];
 
         // Imprimir los datos recibidos para verificar
@@ -38,12 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "idproducto: "; var_dump($idproducto); echo "<br>";
         echo "cantidad: "; var_dump($cantidad); echo "<br>";
         echo "unidadmedida: "; var_dump($unidadmedida); echo "<br>";
-        echo "cantidadmedida: "; var_dump($cantidadmedida); echo "<br>";
         echo "precio: "; var_dump($precio); echo "<br>";
 
         // Guardar detalles de compra
         foreach ($idproducto as $key => $idprod) {
-            $detalleCompra->GuardarDetalleCompra($conexion, $idcompra, $idprod, $cantidad[$key], $unidadmedida[$key], $cantidadmedida[$key], $precio[$key]);
+            $detalleCompra->GuardarDetalleCompra($conexion, $idcompra, $idprod, $cantidad[$key], $unidadmedida[$key], $precio[$key]);
         }
 
         // Redirigir al usuario después de guardar la compra
