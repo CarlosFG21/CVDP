@@ -1,9 +1,5 @@
 <?php
 
-/*include("../db/conexion.php");
-include("DetalleC.php");*/
-
-
 class Compra{
 
 public $estado;

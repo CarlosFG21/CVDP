@@ -2,7 +2,7 @@
   include("layout/header.php");
 ?>
 
-<title>CVDP | San Diego</title>
+<title>CVDP | San Diego</title> 
 
 <?php
   include("layout/nav.php");
@@ -91,7 +91,7 @@
                       <div class="form-group">
                         <label>Cantidad</label>
                         <input type="number" class="form-control" placeholder="Cantidad" name="cantidad" id="cantidad"
-                        required required minlength="1" maxlength="7" step="0.1>
+                        required required minlength="1" maxlength="7" step="0.1">
                       </div>
                     </div>
                     <div class="col-sm-6">
