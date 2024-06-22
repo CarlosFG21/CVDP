@@ -1,9 +1,8 @@
 <?php
 
 	# Incluyendo librerias necesarias #
-    //require "./code128.php";
-    include ("../ticket/code128.php");
-    include("../clases/DetalleCuentaC.php");
+    require "../ticket/code128.php";
+    require "../clases/DetalleCuentaC.php";
 
     $pagocred = new CuentaC();
     $id = $pagocred->ObtenerUltimoIdPagoCredito();
@@ -135,4 +134,4 @@
     $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1",$iddetallecuentac),0,'C',false);
      }}//final del obtener venta
     # Nombre del archivo PDF #
-    $pdf->Output("I","Ticket_pago_No1.pdf",true);
+    $pdf->Output("I","Ticket_credito_No1.pdf",true);
