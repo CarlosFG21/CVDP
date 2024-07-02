@@ -91,10 +91,10 @@ public function GuardarProducto($Idcategoria, $Nombre, $Descripcion, $Cantidad, 
         
     $conexion = new conexion();
     $conexion->conectar();
-
-    $sql = "insert into producto(Id_Categoria, Nombre, Descripcion, Cantidad, Precio_Venta, Ubicacion) values(?,?,?,?,?,?)";
+    $estado=1;
+    $sql = "insert into producto(Id_Categoria, Nombre, Descripcion, Cantidad, Precio_Venta, Ubicacion, Estado) values(?,?,?,?,?,?,?)";
     $ejecutar = $conexion->db->prepare($sql);
-    $ejecutar->bind_param('ississ',$Idcategoria, $Nombre, $Descripcion, $Cantidad, $Precio, $Ubicacion);
+    $ejecutar->bind_param('ississi',$Idcategoria, $Nombre, $Descripcion, $Cantidad, $Precio, $Ubicacion, $estado);
     $ejecutar->execute();
     
     $conexion->desconectar();

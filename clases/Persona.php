@@ -62,12 +62,13 @@ class Persona{
         $conexion = new conexion();
 
         $conexion->conectar();
-
-        $sql = "insert into persona(tipo,nombre,nit) values(?,?,?)";
+        $estado=1;
+        $sql = "insert into persona(tipo,nombre,nit,estado) values(?,?,?,?)";
  
         $ejecutar = $conexion->db->prepare($sql);
 
-        $ejecutar->bind_param('ssi',$tipo,$nombre,$nit);
+        $ejecutar->bind_param('ssii',$tipo,$nombre,$nit,$estado);
+        
 
         $ejecutar->execute();
         

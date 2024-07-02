@@ -104,6 +104,50 @@ public function GuardarDetalleV($id_venta,$id_producto,$cantidad_medida,$unidad_
     $conexion->desconectar();
 }
 
+public function NuevoDetalleV($datosTabla,$id_venta){
+
+    $conexion = new conexion();
+    $conexion->conectar();
+    
+    // Preparar y ejecutar las consultas para insertar los datos en la base de datos
+    foreach ($datosTabla as $venta) {
+    $idventa = $id_venta;    
+    $id_producto = $venta['idproducto'];
+    $cantidad_medida = $venta['cantidad'];
+    $unidad_medida = $venta['unidadmedida'];
+    $precio = $venta['precio'];
+    $subtotal = $precio * $cantidad_medida;
+    $estado=1;
+   
+    $sql = "insert into detalle_venta(Id_Venta,Id_Producto,Cantidad_Medida,Unidad_Medida,Precio,Estado) values(?,?,?,?,?,?)";
+
+    $ejecutar = $conexion->db->prepare($sql);
+    $ejecutar->bind_param('iidsdi',$idventa,$id_producto,$cantidad_medida,$unidad_medida,$subtotal,$estado);
+    $ejecutar->execute();
+
+    // Obtener la cantidad existente del producto
+  $sql_select = "SELECT Cantidad FROM producto WHERE Id_Producto=?";
+  $stmt_select = $conexion->db->prepare($sql_select);
+  $stmt_select->bind_param('i', $id_producto);
+  $stmt_select->execute();
+  $resultado = $stmt_select->get_result();
+  $fila = $resultado->fetch_assoc();
+  $cantidad_existente = $fila['Cantidad'];
+  
+  // Restar la cantidad de venta de la cantidad existente
+  $nueva_cantidad = $cantidad_existente - $cantidad_medida;
+
+  // Actualizar la cantidad en la base de datos
+  $sql_update = "UPDATE producto SET Cantidad=? WHERE Id_Producto=?";
+  $stmt_update = $conexion->db->prepare($sql_update);
+  $stmt_update->bind_param('di', $nueva_cantidad, $id_producto);
+  $stmt_update->execute();
+    
+    }
+
+    $conexion->desconectar();
+}
+
 //--------------------------------------------------------------------------------------------------------------------
 //Funcion mostrar los empleados registrados
 

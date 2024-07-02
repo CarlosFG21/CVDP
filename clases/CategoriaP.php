@@ -53,11 +53,12 @@ class Categoriap{
 
         $conexion->conectar();
 
-        $sql = "insert into categoria_producto(nombre,descripcion) values(?,?)";
+        $estado=1;
+        $sql = "insert into categoria_producto(nombre,descripcion,estado) values(?,?,?)";
 
         $ejecutar = $conexion->db->prepare($sql);
 
-        $ejecutar->bind_param('ss',$nombre,$descripcion);
+        $ejecutar->bind_param('ssi',$nombre,$descripcion,$estado);
 
         $ejecutar->execute();
 

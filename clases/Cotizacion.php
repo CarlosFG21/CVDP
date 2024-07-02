@@ -82,17 +82,17 @@ class cotizacion{
     //------------------------------------------------------------------------------------------------------------------
     //Funcion Guardar Informacion Empleado 
 
-    public function GuardarCotizacion($id_cliente,$id_usuario,$descripcion){
+    public function GuardarCotizacion($id_cliente,$id_usuario,$descripcion,$descuento,$total){
 
         $conexion = new conexion();
 
         $conexion->conectar();
         $estado = 1;
-        $sql = "insert into cotizacion(Id_Cliente,Id_Usuario,Descripcion,Estado) values(?,?,?,?)";
+        $sql = "insert into cotizacion(Id_Cliente,Id_Usuario,Descripcion,Descuento,Total, Estado) values(?,?,?,?,?,?)";
  
         $ejecutar = $conexion->db->prepare($sql);
         
-        $ejecutar->bind_param('iisi',$id_cliente,$id_usuario,$descripcion,$estado);
+        $ejecutar->bind_param('iisddi',$id_cliente,$id_usuario,$descripcion,$descuento,$total,$estado);
 
         $ejecutar->execute();
         

@@ -105,6 +105,21 @@ class Venta{
         $this->total = $_total1;
     }
 
+    public function NuevaVenta($id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$descuento,$total,$pago){
+
+        $conexion = new conexion();
+        $conexion->conectar();
+        $estado = 1;
+        $sql = "insert into venta(Id_Cliente,Id_Usuario,Tipo_Comprobante,Num_Comprobante,Serie_Comprobante,Descuento,Total,Pagado,Estado) values(?,?,?,?,?,?,?,?,?)";
+ 
+        $ejecutar = $conexion->db->prepare($sql);
+        
+        $ejecutar->bind_param('iisisddii',$id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$descuento,$total,$pago,$estado);
+
+        $ejecutar->execute();
+        
+        $conexion->desconectar();
+    }
     //------------------------------------------------------------------------------------------------------------------
     //Funcion Guardar Informacion Empleado 
 
@@ -354,6 +369,7 @@ class Venta{
 
         return $estado;
     }
+
 
 
 }

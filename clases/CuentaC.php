@@ -60,19 +60,28 @@ class CuentaC{
 //------------------------------------------------------------------------------------------------------------------
 //Funcion Guardar Informacion de la cuentas por cobrar
 
-public function GuardarCuentaC1($id_cliente,$id_venta,$deuda_total){
+public function GuardarCuentaC1($id_cliente,$deuda_total){
 
     $conexion = new conexion();
-
     $conexion->conectar();
+
+    $sql2 = "SELECT MAX(id_venta) FROM venta";
+    $result = mysqli_query($conexion->db, $sql2);
+    if ($result) {
+        $row = mysqli_fetch_array($result);
+        $ultimoId = $row[0];
+    } else {
+        $ultimoId = null;
+    }
+    $id_venta = $ultimoId;
     $estado=1;
     $sql = "insert into Cuentaspor_cobrar(Id_Cliente,Id_venta,Deuda_Total,Estado) values(?,?,?,?)";
 
-    $ejecutar = $conexion->db->prepare($sql);
+    $ejecutar3 = $conexion->db->prepare($sql);
     
-    $ejecutar->bind_param('isdi',$id_cliente,$id_venta,$deuda_total,$estado);
+    $ejecutar3->bind_param('iidi',$id_cliente,$id_venta,$deuda_total,$estado);
 
-    $ejecutar->execute();
+    $ejecutar3->execute();
     
     $conexion->desconectar();
 }

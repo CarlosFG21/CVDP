@@ -103,6 +103,32 @@ public function GuardarDetalleCotizacion($id_cotizacion,$id_producto,$cantidad_m
     
     $conexion->desconectar();
 }
+public function NuevoDetalleC($datosTabla,$id_cotizacion){
+
+    $conexion = new conexion();
+    $conexion->conectar();
+    
+    // Preparar y ejecutar las consultas para insertar los datos en la base de datos
+    foreach ($datosTabla as $cotizacion) {
+    $idcotizacion = $id_cotizacion;    
+    $id_producto = $cotizacion['idproducto'];
+    $cantidad_medida = $cotizacion['cantidad'];
+    $unidad_medida = $cotizacion['unidadmedida'];
+    $precio = $cotizacion['precio'];
+    $subtotal = $precio * $cantidad_medida;
+    $subtotal = round($subtotal, 2);
+    $estado=1;
+   
+    $sql = "insert into detalle_cotizacion(Id_Cotizacion,Id_Producto,Cantidad_Medida,Unidad_Medida,Precio,Estado) values(?,?,?,?,?,?)";
+
+    $ejecutar = $conexion->db->prepare($sql);
+    $ejecutar->bind_param('iidsdi',$idcotizacion,$id_producto,$cantidad_medida,$unidad_medida,$subtotal,$estado);
+    $ejecutar->execute();
+    
+    }
+
+    $conexion->desconectar();
+}
 
 //--------------------------------------------------------------------------------------------------------------------
 //Funcion mostrar los empleados registrados
