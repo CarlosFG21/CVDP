@@ -44,7 +44,7 @@
              <div class="alert alert-danger alert-dismissible col-sm-6">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
-                !El rol a ingresar ya existe.!
+                !El producto a ingresar ya existe.!
               </div>
             <?php
               }
@@ -138,7 +138,7 @@
 
 <script type="text/javascript">
   $(function() {
-    $('#btnGuardarRol').click(function() {
+    $('#btnGuardarProducto').click(function() {
 
         var valid = this.form.checkValidity();
         if (valid) {
@@ -148,7 +148,7 @@
             alert('Debe de rellenar los campos o coincidir con el formato indicado');
         }
 
-        var rol = $('#rol').val();
+        var nombre = $('#nombre').val();
         var descripcion = $('#descripcion').val();
 
     });

@@ -421,7 +421,7 @@ include("../clases/DetalleV.php");
                                        <div class="col-md-12">
                                            <div class="form-group">
                                                <label for="">Sub-Total venta</label>
-                                               <input type="number" name="sub_total" id="sub_total" style="text-align: center" class="form-control" required>
+                                               <input type="number" name="sub_total" step="any" id="sub_total" style="text-align: center" class="form-control" required>
                                            </div>
                                        </div>
                                        <div class="col-md-12">

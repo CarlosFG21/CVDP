@@ -236,7 +236,7 @@ public function ValidarProducto($Nombre){
     $resultado = $ejecutar->get_result();
 
     while($fila = $resultado->fetch_array(MYSQLI_NUM)){
-        if(strcmp($fila[0],$nombre)===0){
+        if(strcmp($fila[2],$nombre)===0){
             $estado=1;
             break;
         }
