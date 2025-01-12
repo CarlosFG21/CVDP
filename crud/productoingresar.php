@@ -11,11 +11,12 @@ if(isset($_POST["btnGuardarProducto"])){
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
     $cantidad = $_POST['cantidad'];
-    $precio = $_POST['precio'];
+    $pcompra = $_POST['pcompra'];
+    $pventa = $_POST['pventa'];
     $ubicacion = $_POST['ubicacion'];
 
     if($productoclass->ValidarProducto($nombre)==0){
-        $productoclass->GuardarProducto($categoria,$nombre,$descripcion,$cantidad,$precio,$ubicacion);
+        $productoclass->GuardarProducto($categoria,$nombre,$descripcion,$cantidad,$pcompra,$pventa,$ubicacion);
         header("Location: ../vistas/producto.php");
     }else{
         header("Location: ../vistas/producto_ingresar.php?mensaje=existe");

@@ -46,23 +46,16 @@
                 $id = $_REQUEST['id'];
                 $productoArray = $producto->BuscarProducto($id);
 
-                $categoria = $productoArray->getIdcategoria();
+                $id_categoria = $productoArray->getIdcategoria();
+                $categoria = $productoArray->getCategoria();
                 $nombre = $productoArray->getNombre();
                 $descripcion = $productoArray->getDescripcion();
                 $cantidad = $productoArray->getCantidad();
-                $precio = $productoArray->getPrecio();
+                $pcompra = $productoArray->getPcompra();
+                $pventa = $productoArray->getPventa();
                 $ubicacion = $productoArray->getUbicacion();
                 $estado = $productoArray->getEstado();
  
-                if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'existe'){
-              ?>
-              <div class="alert alert-danger alert-dismissible col-sm-6">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
-                !El Producto a editar ya existe.!
-              </div>
-              <?php
-                }
               ?>
                 <form role="form" method="post" action="../crud/productoeditar.php?id=<?php echo $id;?>">
                   <div class="row">
@@ -76,7 +69,7 @@
                       <div class="form-group">
                         <label>Categoria</label>
                         <select name="categoria" id="categoria" class="form-control">
-                        <?php echo '<option value='.$id.'>'.$categoria.'</option>';?>
+                        <?php echo '<option value='.$id_categoria.'>'.$categoria.'</option>';?>
                         </select>
                       </div>
                     </div>
@@ -102,8 +95,15 @@
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <label>Precio</label>
-                        <?php echo "<input type='text' class='form-control' value='$precio' name='precio' id='precio'
+                        <label>Precio Compra</label>
+                        <?php echo "<input type='text' class='form-control' value='$pcompra' name='pcompra' id='pcompra'
+                        required maxlength='10'>";?>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Precio Venta</label>
+                        <?php echo "<input type='text' class='form-control' value='$pventa' name='pventa' id='pventa'
                         required maxlength='10'>";?>
                       </div>
                     </div>
@@ -125,11 +125,16 @@
                         echo "<input type='text' class='form-control' readonly value='$estado' name='estado' id='estado'>";?>
                       </div>
                     </div>
-                    </div> 
-                  <div class="">
-                  <input type="submit" value="Guardar" class="btn btn-primary " name="btnEditarProducto" id="btnEditarProducto">
-                  <a type="submit" class="btn btn-danger" href="producto.php">Regresar</a>
-                </div>     
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label> -</label>
+                        <div class="d-flex">
+                          <input type="submit" value="Guardar" class="btn btn-primary w-50 me-2" name="btnEditarProducto" id="btnEditarProducto">
+                          <a type="submit" class="btn btn-danger w-50" href="producto.php">Regresar</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </form>
               </div>
               <!-- /.card-body -->

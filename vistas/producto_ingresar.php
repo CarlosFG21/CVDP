@@ -97,8 +97,16 @@
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>Precio</label>
-                        <input type="number" class="form-control" placeholder="Precio" name="precio" id="precio"
+                        <label>Precio Compra</label>
+                        <input type="number" class="form-control" placeholder="Precio Compra" name="pcompra" id="pcompra"
+                         required minlength="1" maxlength="9" step="0.1">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Precio Venta</label>
+                        <input type="number" class="form-control" placeholder="Precio Venta" name="pventa" id="pventa"
                          required minlength="1" maxlength="9" step="0.1">
                       </div>
                     </div>
@@ -110,11 +118,17 @@
                         pattern="^[a-zA-Záéíóú0-9]{1,30}" required minlength="1" maxlength="15">
                       </div>
                     </div>
-                    </div> 
-                  <div class="">
-                  <input type="submit" value="Guardar" class="btn btn-primary " name="btnGuardarProducto" id="btnGuardarProducto">
-                  <a type="submit" class="btn btn-danger" href="producto.php">Regresar</a>
-                </div>     
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label> -</label>
+                        <div class="d-flex">
+                          <input type="submit" value="Guardar" class="btn btn-primary w-50 me-2" name="btnGuardarProducto" id="btnGuardarProducto">
+                          <a class="btn btn-danger w-50" href="producto.php">Regresar</a>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div> 
                 </form>
               </div>
               <!-- /.card-body -->

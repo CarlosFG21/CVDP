@@ -21,7 +21,7 @@ include("layout/nav.php");
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Roles</h1>
+                    <h1>Producto</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -57,7 +57,8 @@ include("layout/nav.php");
                             $nombre = $productoArray->getNombre();
                             $descripcion = $productoArray->getDescripcion();
                             $cantidad = $productoArray->getCantidad();
-                            $precio = $productoArray->getPrecio();
+                            $pcompra = $productoArray->getPcompra();
+                            $pventa = $productoArray->getPventa();
                             $ubicacion = $productoArray->getUbicacion();
                             $estado = $productoArray->getEstado();
  
@@ -105,7 +106,13 @@ include("layout/nav.php");
                               <div class="col-sm-6">
                                 <div class="form-group">
                                   <label>Precio</label>
-                                  <?php echo "<input type='text' class='form-control' value='$precio'readonly>";?>
+                                  <?php echo "<input type='text' class='form-control' value='$pcompra'readonly>";?>
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="form-group">
+                                  <label>Precio</label>
+                                  <?php echo "<input type='text' class='form-control' value='$pventa'readonly>";?>
                                 </div>
                               </div>
                               <div class="col-sm-6">
@@ -126,9 +133,12 @@ include("layout/nav.php");
                                   ?>
                                 </div>
                               </div>
-                            </div>
-                            <div class="">
-                              <a type="submit" class="btn btn-danger" href="producto.php">Regresar</a>
+                              <div class="col-sm-6">
+                                <div class="form-group">
+                                  <label>-</label>
+                                  <a type="submit" class="btn btn-danger form-control" href="producto.php">Regresar</a>
+                                </div>
+                              </div>
                             </div>
                           </form>
                         </div>
