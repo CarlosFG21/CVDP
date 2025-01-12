@@ -49,7 +49,8 @@ include("layout/nav.php");
                                         <th>Producto</th>
                                         <th>Descripcion</th>
                                         <th>Cantidad</th>
-                                        <th>Precio</th>
+                                        <th>Compra</th>
+                                        <th>Venta</th>
                                         <th>Ubicacion</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
@@ -68,7 +69,8 @@ include("layout/nav.php");
                                             $nombre = $productoArray[$i]->getNombre();
                                             $descripcion = $productoArray[$i]->getDescripcion();
                                             $cantidad = $productoArray[$i]->getCantidad();
-                                            $precio = $productoArray[$i]->getPrecio();
+                                            $p_compra = $productoArray[$i]->getPcompra();
+                                            $p_venta = $productoArray[$i]->getPventa();
                                             $ubicacion = $productoArray[$i]->getUbicacion();
                                             $estado = $productoArray[$i]->getEstado();
 
@@ -78,7 +80,8 @@ include("layout/nav.php");
                                                 <td>$nombre</td>
                                                 <td>$descripcion</td>
                                                 <td>$cantidad</td>
-                                                <td>$precio</td>
+                                                <td>$p_compra</td>
+                                                <td>$p_venta</td>
                                                 <td>$ubicacion</td>";
 
                                                 if($estado==1){
@@ -116,7 +119,8 @@ include("layout/nav.php");
                                         <th>Producto</th>
                                         <th>Descripcion</th>
                                         <th>Cantidad</th>
-                                        <th>Precio</th>
+                                        <th>Compra</th>
+                                        <th>Venta</th>
                                         <th>Ubicacion</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>

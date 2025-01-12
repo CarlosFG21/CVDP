@@ -155,24 +155,24 @@
                     </form>
 
                     <style>
-        /* Personaliza el contenedor de Select2 */
-        .select2-container .select2-selection--single {
-            height: 1000px;
-            padding: 0; /* Quita el padding para centrar verticalmente */
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ced4da;
-            display: flex;
-            align-items: center; /* Centra verticalmente */
-            justify-content: center; /* Centra horizontalmente */
-        }
+                        /* Personaliza el contenedor de Select2 */
+                        .select2-container .select2-selection--single {
+                            height: 1000px;
+                            padding: 0; /* Quita el padding para centrar verticalmente */
+                            font-size: 16px;
+                            border-radius: 5px;
+                            border: 1px solid #ced4da;
+                            display: flex;
+                            align-items: center; /* Centra verticalmente */
+                            justify-content: center; /* Centra horizontalmente */
+                        }
 
-        /* Personaliza el placeholder de Select2 */
-        .select2-container--default .select2-selection--single .select2-selection__placeholder {
-            color: #6c757d;
-            font-style: italic;
-        }
-        </style>
+                        /* Personaliza el placeholder de Select2 */
+                        .select2-container--default .select2-selection--single .select2-selection__placeholder {
+                            color: #6c757d;
+                            font-style: italic;
+                        }
+                    </style>
 
                     <!-- Modal producto-->
                     <div class="modal fade" id="productoModal" tabindex="-1" role="dialog"
