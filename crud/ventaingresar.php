@@ -29,14 +29,15 @@ $id_usuario = $_POST['id_usuario'];
 $tipoc = $_POST['tipoc'];
 $subtotal = $_POST['sub_total'];
 $descuento = $_POST['descuento'];
+$pago_instalacion = $_POST['pago_instalacion'];
 $pago = $_POST['pago'];
 // Obtener los datos de la tabla enviados desde el formulario
 $datosTabla = json_decode($_POST['datosTabla'], true);
 
 if($venta->ValidarVenta2($id_venta)==0){
     
-$total = $subtotal-$descuento;    
-$venta->NuevaVenta($id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$descuento,$total,$pago);
+$total = $subtotal-$descuento+$pago_instalacion;    
+$venta->NuevaVenta($id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$descuento,$pago_instalacion,$total,$pago);
 
 $detalleVenta->NuevoDetalleV($datosTabla,$id_venta);
 

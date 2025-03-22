@@ -10,6 +10,7 @@ class Venta{
     public $id_usuario;
     public $id_venta;
     public $descuento;
+    public $pago_instalacion;
     public $n_comprobante;
     public $pago;
     public $serie;
@@ -64,6 +65,13 @@ class Venta{
     public function setDescuento($_descuento1){
         $this->descuento = $_descuento1;
     }
+    public function getPagoinstalacion(){
+        return $this->pago_instalacion;
+    }
+
+    public function setPagoinstalacion($_pago_instalacion1){
+        $this->pago_instalacion = $_pago_instalacion1;
+    }
 
     public function getComprobante(){
         return $this->n_comprobante;
@@ -105,16 +113,16 @@ class Venta{
         $this->total = $_total1;
     }
 
-    public function NuevaVenta($id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$descuento,$total,$pago){
+    public function NuevaVenta($id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$descuento,$pago_instalacion,$total,$pago){
 
         $conexion = new conexion();
         $conexion->conectar();
         $estado = 1;
-        $sql = "insert into venta(Id_Cliente,Id_Usuario,Tipo_Comprobante,Num_Comprobante,Serie_Comprobante,Descuento,Total,Pagado,Estado) values(?,?,?,?,?,?,?,?,?)";
+        $sql = "insert into venta(Id_Cliente,Id_Usuario,Tipo_Comprobante,Num_Comprobante,Serie_Comprobante,Descuento,Pago_Envio_Instalacion,Total,Pagado,Estado) values(?,?,?,?,?,?,?,?,?,?)";
  
         $ejecutar = $conexion->db->prepare($sql);
         
-        $ejecutar->bind_param('iisisddii',$id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$descuento,$total,$pago,$estado);
+        $ejecutar->bind_param('iisisdddii',$id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$descuento,$pago_instalacion,$total,$pago,$estado);
 
         $ejecutar->execute();
         
@@ -123,17 +131,17 @@ class Venta{
     //------------------------------------------------------------------------------------------------------------------
     //Funcion Guardar Informacion Empleado 
 
-    public function GuardarVenta($id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$fecha,$descuento,$total,$pago){
+    public function GuardarVenta($id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$fecha,$descuento,$pago_instalacion,$total,$pago){
 
         $conexion = new conexion();
 
         $conexion->conectar();
         $estado = 1;
-        $sql = "insert into venta(Id_Cliente,Id_Usuario,Tipo_Comprobante,Num_Comprobante,Serie_Comprobante,Fecha,Descuento,Total,Pagado,Estado) values(?,?,?,?,?,?,?,?,?,?)";
+        $sql = "insert into venta(Id_Cliente,Id_Usuario,Tipo_Comprobante,Num_Comprobante,Serie_Comprobante,Fecha,Descuento,Pago_Envio_Instalacion,Total,Pagado,Estado) values(?,?,?,?,?,?,?,?,?,?,?)";
  
         $ejecutar = $conexion->db->prepare($sql);
         
-        $ejecutar->bind_param('iiisisddii',$id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$fecha,$descuento,$total,$pago,$estado);
+        $ejecutar->bind_param('iiisisdddii',$id_cliente,$id_usuario,$tipoc,$n_comprobante,$serie,$fecha,$descuento,$pago_instalacion,$total,$pago,$estado);
 
         $ejecutar->execute();
         
@@ -187,9 +195,10 @@ class Venta{
             $ventaIndex->setSerie($fila[5]);
             $ventaIndex->setFecha($fila[6]);
             $ventaIndex->setDescuento($fila[7]);
-            $ventaIndex->setTotal($fila[8]);
-            $ventaIndex->setPago($fila[9]);
-            $ventaIndex->setEstado($fila[10]);
+            $ventaIndex->setPagoinstalacion($fila[8]);
+            $ventaIndex->setTotal($fila[9]);
+            $ventaIndex->setPago($fila[10]);
+            $ventaIndex->setEstado($fila[11]);
             
          array_push($ventaob,$ventaIndex);
 
@@ -205,18 +214,18 @@ class Venta{
     //-----------------------------------------------------------------------------------------------------------------------------------
     //Funcion Editar empleados
 
-    public function EditarVenta($n_comprobante,$serie,$descuento,$total,$pago,$id_venta){ 
+    public function EditarVenta($n_comprobante,$serie,$descuento,$pago_instalacion,$total,$pago,$id_venta){ 
 
 
         $conexion = new conexion();
 
         $conexion->conectar();
 
-        $sql = "update venta set Num_Comprobante=?, Serie_Comprobante=?, Descuento=?, Total=?, Pagado=? where id_venta=?";
+        $sql = "update venta set Num_Comprobante=?, Serie_Comprobante=?, Descuento=?, Pago_Envio_Instalacion=?, Total=?, Pagado=? where id_venta=?";
 
         $ejecutar = $conexion->db->prepare($sql);
 
-        $ejecutar->bind_param('isddii',$n_comprobante,$serie,$descuento,$total,$pago,$id_venta);
+        $ejecutar->bind_param('isdddii',$n_comprobante,$serie,$descuento,$pago_instalacion,$total,$pago,$id_venta);
 
         $ejecutar->execute();
 
