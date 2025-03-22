@@ -279,6 +279,40 @@ public function ValidarCuentaC($id_cobrar){
         return $CuentaArray;
 
     }
+    public function BuscarCuentacV($id_venta){
+
+        $conexion = new conexion();
+
+        $conexion->conectar();
+
+        $CuentaArray = new CuentaC();
+        
+        $sql = "select * from cuentaspor_cobrar where id_venta=?";
+
+        $ejecutar = $conexion->db->prepare($sql);
+
+        $ejecutar->bind_param('i',$id_venta);
+
+        $ejecutar->execute();
+
+        $resultado = $ejecutar->get_result();
+
+        while($fila = $resultado->fetch_array(MYSQLI_NUM)){
+
+            $CuentaArray->setIdcobrar($fila[0]);
+            $CuentaArray->setIdcliente($fila[1]);
+            $CuentaArray->setIdventa($fila[2]);
+            $CuentaArray->setDeuda($fila[3]);
+            $CuentaArray->setEstado($fila[4]);
+            $CuentaArray->setFecha($fila[5]);
+
+        }
+
+        $conexion->desconectar();
+
+        return $CuentaArray;
+
+    }
     public function ObtenerUltimoIdPagoCredito(){
         $conexion = new conexion();
         $conexion->conectar();

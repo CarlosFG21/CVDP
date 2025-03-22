@@ -2,7 +2,7 @@
 
 	# Incluyendo librerias necesarias #
 	require "./code128.php";
-	require "../clases/DetalleV.php";
+    require "../clases/CuentaC.php";
 	$id = $_REQUEST['id'];
 
     $venta = new Venta();
@@ -17,12 +17,14 @@
     $serie = $ventaArray[$i]->getSerie();
     $fecha = $ventaArray[$i]->getFecha();
     $descuento = $ventaArray[$i]->getDescuento();
-	$pago_instalacion = $ventaArray[$i]->getPagoinstalacion();
+	$pago_instalacion =$ventaArray[$i]->getPagoinstalacion();
     $total = $ventaArray[$i]->getTotal();
     $pago = $ventaArray[$i]->getPago();
     $estado = $ventaArray[$i]->getEstado(); 
     if($id == $idventa){
-
+        $cuentasporcobrar = new CuentaC();
+        $cuentaporc = $cuentasporcobrar->BuscarCuentacV($idventa);
+        $pagado = $cuentaporc->getDeuda();
 	$pdf = new PDF_Code128('P','mm','Letter');
 	$pdf->SetMargins(17,17,17);
 	$pdf->AddPage();
@@ -102,6 +104,7 @@
 	  }}
 	$pdf->Ln(2);
 
+	
 
 	$pdf->Ln(9);
 
@@ -135,7 +138,7 @@
         $id_producto2 = $productoArray->getIdproducto();
         $nombre_producto = $productoArray->getNombre();
         $precio_producto = $productoArray->getPrecio();
-	
+        
 	/*----------  Detalles de la tabla  ----------*/
 	$pdf->Cell(100,7,iconv("UTF-8", "ISO-8859-1",$nombre_producto),'L',0,'C');
 	$pdf->Cell(18,7,iconv("UTF-8", "ISO-8859-1",$cantidad_medida),'L',0,'C');
@@ -172,8 +175,25 @@
 
 	$pdf->Cell(100,7,iconv("UTF-8", "ISO-8859-1",''),'',0,'C');
 	$pdf->Cell(15,7,iconv("UTF-8", "ISO-8859-1",''),'',0,'C');
-	$pdf->Cell(32,7,iconv("UTF-8", "ISO-8859-1","TOTAL A PAGAR"),'T',0,'C');
+	$pdf->Cell(32,7,iconv("UTF-8", "ISO-8859-1","TOTAL"),'T',0,'C');
 	$pdf->Cell(34,7,iconv("UTF-8", "ISO-8859-1","Q. ".$total),'T',0,'C');
+
+	$pdf->Ln(7);
+
+	$pdf->Cell(100,7,iconv("UTF-8", "ISO-8859-1",''),'',0,'C');
+	$pdf->Cell(15,7,iconv("UTF-8", "ISO-8859-1",''),'',0,'C');
+	$pdf->Cell(32,7,iconv("UTF-8", "ISO-8859-1","CANTIDAD PAGADA"),'',0,'C');
+	$pdf->Cell(34,7,iconv("UTF-8", "ISO-8859-1","- Q. ".$total-$pagado),'',0,'C');
+
+	$pdf->Ln(7);
+ 
+
+	$pdf->Cell(100,7,iconv("UTF-8", "ISO-8859-1",''),'',0,'C');
+	$pdf->Cell(15,7,iconv("UTF-8", "ISO-8859-1",''),'',0,'C');
+
+
+	$pdf->Cell(32,7,iconv("UTF-8", "ISO-8859-1","TOTAL A PAGAR"),'T',0,'C');
+	$pdf->Cell(34,7,iconv("UTF-8", "ISO-8859-1","Q. ".$pagado),'T',0,'C');
 
 	$pdf->Ln(12);
 

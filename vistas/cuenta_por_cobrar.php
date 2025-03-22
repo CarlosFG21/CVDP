@@ -95,7 +95,7 @@ include("layout/nav.php");
                     <i class='fas fa-credit-card'> Pago/Abono</i> 
                     </a>";
                     }
-                    echo "<a type='submit' href='../ticket/Vista.php?id=$idventa' class='btn bg-gradient-primary' title='Visualizar Venta'>
+                    echo "<a type='submit' href='../ticket/VistaCredito.php?id=$idventa' class='btn bg-gradient-primary' title='Visualizar Venta'>
                     <i class='fas fa-eye'></i> 
                     </a>&nbsp;&nbsp;";
 

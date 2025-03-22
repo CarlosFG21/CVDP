@@ -24,6 +24,7 @@ $descripcion = $_POST['descripcion'];
 
 $subtotal = $_POST['sub_total'];
 $descuento = $_POST['descuento'];
+$pago_instalacion = $_POST['pago_instalacion'];
 
 // Obtener los datos de la tabla enviados desde el formulario
 $datosTabla = json_decode($_POST['datosTabla'], true);
@@ -33,8 +34,8 @@ $detalleCotizacion = new DetalleCotizacion();
     
   if($cotizacionN->ValidarCotizacion($id_cliente,$id_usuario)==0){
 
-    $total = $subtotal-$descuento;  
-    $cotizacionN->GuardarCotizacion($id_cliente,$id_usuario,$descripcion,$descuento,$total);
+    $total = $subtotal-$descuento+$pago_instalacion;  
+    $cotizacionN->GuardarCotizacion($id_cliente,$id_usuario,$descripcion,$descuento,$pago_instalacion,$total);
 
     $detalleCotizacion->NuevoDetalleC($datosTabla,$id_cotizacion);
 

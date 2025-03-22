@@ -15,6 +15,7 @@
     $descripcion = $cotizacionArray[$i]->getDescripcion();
     $fecha = $cotizacionArray[$i]->getFecha();
     $descuento = $cotizacionArray[$i]->getDescuento();
+	$pago_instalacion = $cotizacionArray[$i]->getPagoinstalacion();
     $total = $cotizacionArray[$i]->getTotal();
     $estado = $cotizacionArray[$i]->getEstado(); 
     if($id == $idcotizacion){
@@ -93,11 +94,7 @@
 	$pdf->Cell(8,7,iconv("UTF-8", "ISO-8859-1","Nit: "),0,0,'L');
 	$pdf->SetTextColor(97,97,97);
 	$pdf->Cell(60,7,iconv("UTF-8", "ISO-8859-1",$nit_cliente),0,0,'L');
-	//$pdf->SetTextColor(39,39,51);
-	//$pdf->Cell(7,7,iconv("UTF-8", "ISO-8859-1","Descripcion de la cotización:"),0,0,'L');
-	//$pdf->SetTextColor(97,97,97);
-	//$pdf->Cell(35,7,iconv("UTF-8", "ISO-8859-1",$descripcion),0,0);
-	//$pdf->SetTextColor(39,39,51);
+
 	  }}
 	$pdf->Ln(8);
     
@@ -142,7 +139,7 @@
 	/*----------  Detalles de la tabla  ----------*/
 	$pdf->Cell(100,7,iconv("UTF-8", "ISO-8859-1",$nombre_producto),'L',0,'C');
 	$pdf->Cell(18,7,iconv("UTF-8", "ISO-8859-1",$cantidad_medida),'L',0,'C');
-	$pdf->Cell(28,7,iconv("UTF-8", "ISO-8859-1","Q. ".$precio_producto),'L',0,'C');
+	$pdf->Cell(28,7,iconv("UTF-8", "ISO-8859-1","Q. ".$precio_cotizacion/$cantidad_medida),'L',0,'C');
 	//$pdf->Cell(19,7,iconv("UTF-8", "ISO-8859-1","Q. ".$precio_pro),'L',0,'C');
 	$pdf->Cell(35,7,iconv("UTF-8", "ISO-8859-1","Q. ".$precio_cotizacion),'LR',0,'C');
 	$pdf->Ln(7);
@@ -156,10 +153,15 @@
 	$pdf->Cell(100,7,iconv("UTF-8", "ISO-8859-1",''),'T',0,'C');
 	$pdf->Cell(15,7,iconv("UTF-8", "ISO-8859-1",''),'T',0,'C');
 	$pdf->Cell(32,7,iconv("UTF-8", "ISO-8859-1","SUBTOTAL"),'T',0,'C');
-	$pdf->Cell(34,7,iconv("UTF-8", "ISO-8859-1","+ Q. ".$total+$descuento),'T',0,'C');
+	$pdf->Cell(34,7,iconv("UTF-8", "ISO-8859-1","+ Q. ".$total+$descuento-$pago_instalacion),'T',0,'C');
 
 	$pdf->Ln(7);
 
+	$pdf->Cell(100,7,iconv("UTF-8", "ISO-8859-1",''),'',0,'C');
+	$pdf->Cell(15,7,iconv("UTF-8", "ISO-8859-1",''),'',0,'C');
+	$pdf->Cell(32,7,iconv("UTF-8", "ISO-8859-1","ENVIO/INSTALACION"),'',0,'C');
+	$pdf->Cell(34,7,iconv("UTF-8", "ISO-8859-1","+ Q. ".$pago_instalacion),'',0,'C');
+	$pdf->Ln(7);
 	$pdf->Cell(100,7,iconv("UTF-8", "ISO-8859-1",''),'',0,'C');
 	$pdf->Cell(15,7,iconv("UTF-8", "ISO-8859-1",''),'',0,'C');
 	$pdf->Cell(32,7,iconv("UTF-8", "ISO-8859-1","DESCUENTO"),'',0,'C');

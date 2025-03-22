@@ -10,6 +10,7 @@ class cotizacion{
     public $id_usuario;
     public $id_cotizacion;
     public $descuento;
+    public $pago_instalacion;
     public $descripcion;
     public $total;
 
@@ -70,7 +71,13 @@ class cotizacion{
         $this->descuento = $_descuento1;
     }
 
+    public function getPagoinstalacion(){
+        return $this->pago_instalacion;
+    }
 
+    public function setPagoinstalacion($_pago_instalacion1){
+        $this->pago_instalacion = $_pago_instalacion1;
+    }
     public function getTotal(){
         return $this->total;
     }
@@ -82,34 +89,34 @@ class cotizacion{
     //------------------------------------------------------------------------------------------------------------------
     //Funcion Guardar Informacion Empleado 
 
-    public function GuardarCotizacion($id_cliente,$id_usuario,$descripcion,$descuento,$total){
+    public function GuardarCotizacion($id_cliente,$id_usuario,$descripcion,$descuento,$pago_instalacion,$total){
 
         $conexion = new conexion();
 
         $conexion->conectar();
         $estado = 1;
-        $sql = "insert into cotizacion(Id_Cliente,Id_Usuario,Descripcion,Descuento,Total, Estado) values(?,?,?,?,?,?)";
+        $sql = "insert into cotizacion(Id_Cliente,Id_Usuario,Descripcion,Descuento,Pago_Envio_Instalacion,Total, Estado) values(?,?,?,?,?,?,?)";
  
         $ejecutar = $conexion->db->prepare($sql);
         
-        $ejecutar->bind_param('iisddi',$id_cliente,$id_usuario,$descripcion,$descuento,$total,$estado);
+        $ejecutar->bind_param('iisdddi',$id_cliente,$id_usuario,$descripcion,$descuento,$pago_instalacion,$total,$estado);
 
         $ejecutar->execute();
         
         $conexion->desconectar();
     }
     //------------FUNCION DE EDITAR COTIZACION-----------------------
-    public function EditarCotizacion($descuento,$total,$id_cotizacion){ 
+    public function EditarCotizacion($descuento,$pago_instalacion,$total,$id_cotizacion){ 
 
         $conexion = new conexion();
 
         $conexion->conectar();
 
-        $sql = "update cotizacion set Descuento=?, Total=? where id_cotizacion=?";
+        $sql = "update cotizacion set Descuento=?, Pago_Envio_Instalacion=?, Total=? where id_cotizacion=?";
 
         $ejecutar = $conexion->db->prepare($sql);
 
-        $ejecutar->bind_param('ddi',$descuento,$total,$id_cotizacion);
+        $ejecutar->bind_param('dddi',$descuento,$pago_instalacion,$total,$id_cotizacion);
 
         $ejecutar->execute();
 
@@ -141,8 +148,9 @@ class cotizacion{
             $cotizacionIndex->setDescripcion($fila[3]);
             $cotizacionIndex->setFecha($fila[4]);
             $cotizacionIndex->setDescuento($fila[5]);
-            $cotizacionIndex->setTotal($fila[6]);
-            $cotizacionIndex->setEstado($fila[7]);
+            $cotizacionIndex->setPagoinstalacion($fila[6]);
+            $cotizacionIndex->setTotal($fila[7]);
+            $cotizacionIndex->setEstado($fila[8]);
             
          array_push($cotizacionob,$cotizacionIndex);
 
@@ -185,8 +193,9 @@ class cotizacion{
             $cotizacionArray->setDescripcion($fila[3]);
             $cotizacionArray->setFecha($fila[4]);
             $cotizacionArray->setDescuento($fila[5]);
-            $cotizacionArray->setTotal($fila[6]);
-            $cotizacionArray->setEstado($fila[7]);
+            $cotizacionArray->setPagoinstalacion($fila[6]);
+            $cotizacionArray->setTotal($fila[7]);
+            $cotizacionArray->setEstado($fila[8]);
 
         }
 

@@ -301,9 +301,16 @@ include("../clases/DetalleV.php");
                                                </div>
                                                <div class="col-md-2">
                                                    <div class="form-group">
-                                                       <label for="">Precio:</label>
+                                                       <label for="">Precio Actual:</label>
                                                        <input type="number"  id="precio_producto" class="form-control" disabled>
-                                                       <input type="number" step="any" name="precio_producto2" id="precio_producto2" class="form-control" hidden>
+                                                       <input type="number" step="any" name="precio_producto5" id="precio_producto5" class="form-control" hidden>
+                                                   </div>
+                                               </div>
+                                               <div class="col-md-2">
+                                                   <div class="form-group">
+                                                       <label for="">Precio:</label>
+                                                       <input type="number"  id="precio_producto" class="form-control" hidden>
+                                                       <input type="number" step="any" name="precio_producto2" id="precio_producto2" class="form-control" style="background-color: #fff819">
                                                    </div>
                                                </div>
                                                
@@ -427,7 +434,13 @@ include("../clases/DetalleV.php");
                                        <div class="col-md-12">
                                            <div class="form-group">
                                                <label for="">Descuento</label>
-                                               <input type="number"  step="any" style="text-align: center" min=0 oninput="validity.valid||(value='');" class="form-control" name="descuento" id="descuento" required>
+                                               <input type="number"  step="any" style="text-align: center" min=0 value="0" oninput="validity.valid||(value='');" class="form-control" name="descuento" id="descuento" required>
+                                           </div>
+                                       </div>
+                                       <div class="col-md-12">
+                                           <div class="form-group">
+                                               <label for="">Pago de transporte/Instalación</label>
+                                               <input type="number"  step="any" style="text-align: center" min=0 value="0" oninput="validity.valid||(value='');" class="form-control" name="pago_instalacion" id="pago_instalacion" required>
                                            </div>
                                        </div>
                                        <script>
@@ -435,10 +448,11 @@ include("../clases/DetalleV.php");
                                         function calcularTotalGeneral() {
                                         // Obtener el valor del descuento
                                         var descuento = parseFloat(document.getElementById('descuento').value);
+                                        var pago_instalacion = parseFloat(document.getElementById('pago_instalacion').value);
                                         // Obtener el valor del total de la venta (asumido como 100 por simplicidad)
                                         var totalVenta = parseFloat(document.getElementById('sub_total').value);
                                         // Calcular el total general restando el descuento al total de la venta
-                                        var totalGeneral = totalVenta - descuento;
+                                        var totalGeneral = totalVenta - descuento + pago_instalacion;
             
                                          // Mostrar el total de la venta y el total general en los elementos HTML correspondientes
            
@@ -446,8 +460,10 @@ include("../clases/DetalleV.php");
                                         }
                                         // Obtener el elemento de entrada del descuento
                                         var inputDescuento = document.getElementById('descuento');
+                                        var inputPago_instalacion = document.getElementById('pago_instalacion');
                                         // Agregar un evento de escucha al campo de entrada del descuento para que el cálculo se realice automáticamente
                                         inputDescuento.addEventListener('input', calcularTotalGeneral);
+                                        inputPago_instalacion.addEventListener('input', calcularTotalGeneral);
                                         </script>
                                        <div class="col-md-12">
                                            <div class="form-group">
