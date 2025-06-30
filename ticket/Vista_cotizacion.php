@@ -134,7 +134,7 @@
         $productoArray = $productoob->BuscarProducto2($id_producto);
         $id_producto2 = $productoArray->getIdproducto();
         $nombre_producto = $productoArray->getNombre();
-        $precio_producto = $productoArray->getPrecio();
+        $precio_producto = $productoArray->getPrecioV();
 	
 	/*----------  Detalles de la tabla  ----------*/
 	$pdf->Cell(100,7,iconv("UTF-8", "ISO-8859-1",$nombre_producto),'L',0,'C');

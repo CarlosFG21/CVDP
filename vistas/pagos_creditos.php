@@ -76,6 +76,8 @@ include("layout/nav.php");
                     $fecha = $pagoscArray[$i]->getFechapago();
                     $cantidadp = $pagoscArray[$i]->getCantidadabonar();
                     $estado = $pagoscArray[$i]->getEstado();
+                    $pagocred = $pagoscArray[$i]->getCantidadabonar();
+                    $pagosal = $pagoscArray[$i]->getSaldop();
 
                   
                     echo "<tr>";
@@ -86,10 +88,10 @@ include("layout/nav.php");
                          <td><center>$fecha</center></td>
                     ";
 
-                    if($estado==1){
-                        echo "<td><h4><span class='badge bg-danger'>Pendiente</span></h4></td>";
+                    if(($pagosal-$pagocred)!= 0){
+                        echo "<td><h4><span class='badge bg-warning'>Abono</span></h4></td>";
                     }else{
-                     echo "<td><h4><span class='badge bg-success'>Cancelada</span></h4></td>";
+                     echo "<td><h4><span class='badge bg-success'>Pago Total</span></h4></td>";
                     }
                     
                     echo "<td>

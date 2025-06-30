@@ -321,7 +321,8 @@ class Producto2{
     public $id_detalle;
     public $id_producto;
     public $nombre_producto;
-    public $precio_producto;
+    public $precioC_producto;
+    public $precioV_producto;
     public $ubicacion_producto;
     
     //------------------- creacion de metodos get y set
@@ -378,14 +379,20 @@ class Producto2{
     public function setNombre($_nombre_producto1){
         $this->nombre_producto = $_nombre_producto1;
     }
-    public function getPrecio(){
-        return $this->precio_producto;
+    public function getPrecioC(){
+        return $this->precioC_producto;
     }
     
-    public function setPrecio($_precio_producto1){
-        $this->precio_producto = $_precio_producto1;
+    public function setPrecioC($_precioC_producto1){
+        $this->precioC_producto = $_precioC_producto1;
+    }
+    public function getPrecioV(){
+        return $this->precioV_producto;
     }
     
+    public function setPrecioV($_precioV_producto1){
+        $this->precioV_producto = $_precioV_producto1;
+    }
     public function getUbicacion(){
         return $this->ubicacion_producto;
     }
@@ -419,9 +426,10 @@ class Producto2{
                    $productoIndex->setNombre($fila[2]);
                    $productoIndex->setDescripcion($fila[3]);
                    $productoIndex->setCantidad($fila[4]);
-                   $productoIndex->setPrecio($fila[5]);
-                   $productoIndex->setUbicacion($fila[6]);
-                   $productoIndex->setEstado($fila[7]);
+                   $productoIndex->setPrecioC($fila[5]);
+                   $productoIndex->setPrecioV($fila[6]);
+                   $productoIndex->setUbicacion($fila[7]);
+                   $productoIndex->setEstado($fila[8]);
                    
                 array_push($productoob,$productoIndex);
        
@@ -459,7 +467,7 @@ class Producto2{
 
             $productoArray->setIdproducto($fila[0]);
             $productoArray->setNombre($fila[2]);
-            $productoArray->setPrecio($fila[5]); 
+            $productoArray->setPrecioV($fila[5]); 
 
         }
 

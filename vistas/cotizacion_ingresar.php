@@ -158,8 +158,8 @@ include("../clases/DetalleV.php");
                                                                    <th><center>Nombre</center></th>
                                                                    <th><center>Descripción</center></th>
                                                                    <th><center>Cantidad</center></th>
-                                                                   <th><center>Precio venta</center></th>
-                                                                   <th><center>Ubicacion</center></th>
+                                                                   <th><center>Precio Compra</center></th>
+                                                                   <th><center>Precio Venta</center></th>
                                                                    <th><center>Selecionar</center></th>
                                                                </tr>
                                                                </thead>
@@ -173,7 +173,8 @@ include("../clases/DetalleV.php");
                                                                 $nombre_producto = $productoArray[$i]->getNombre();
                                                                 $descripcion = $productoArray[$i]->getDescripcion();
                                                                 $cantidad_producto = $productoArray[$i]->getCantidad();
-                                                                $precio_producto = $productoArray[$i]->getPrecio();
+                                                                $precioC_producto = $productoArray[$i]->getPrecioC();
+                                                                $precio_producto = $productoArray[$i]->getPrecioV();
                                                                 $ubicacion = $productoArray[$i]->getUbicacion();
                                                                 
                                                                 ?>
@@ -182,8 +183,8 @@ include("../clases/DetalleV.php");
                                                                        <td><?php echo $nombre_producto;?></td>
                                                                        <td><?php echo $descripcion;?></td>
                                                                        <td><?php echo $cantidad_producto;?></td>
-                                                                       <td><?php echo $precio_producto;?></td>
-                                                                       <td><?php echo $ubicacion;?></td>
+                                                                       <td>Q. <?php echo $precioC_producto;?></td>
+                                                                       <td>Q. <?php echo $precio_producto;?></td>
                                                                        <td>
                                                                            <button data-dismiss="modal" class="btn btn-success" id="btn_selecionar_producto<?php echo $id_producto;?>">
                                                                                Selecionar

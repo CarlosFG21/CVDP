@@ -105,7 +105,7 @@
         $productoArray = $productoob->BuscarProducto1($id_producto);
         $id_producto2 = $productoArray->getIdproducto();
         $nombre_producto = $productoArray->getNombre();
-        $precio_producto = $productoArray->getPrecio();
+        $precio_producto = $productoArray->getPreciov();
                                                               
     /*----------  Detalles de la tabla  ----------*/
     $pdf->Ln(2);

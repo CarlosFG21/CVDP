@@ -186,6 +186,24 @@ public function ObtenerDetalleCuentaC(){
 
         return $estado;
     }
+    public function ObtenerUltimoIdPagoCredito(){
+        $conexion = new conexion();
+        $conexion->conectar();
+    
+        $sql = "SELECT MAX(id_Detallepagos) FROM detalle_pagos";
+        $result = mysqli_query($conexion->db, $sql);
+    
+        if ($result) {
+            $row = mysqli_fetch_array($result);
+            $ultimoId = $row[0];
+        } else {
+            $ultimoId = null;
+        }
+    
+        $conexion->desconectar();
+        
+        return $ultimoId;
+    }
 
 }
 
